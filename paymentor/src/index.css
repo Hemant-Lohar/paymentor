@@ -1,0 +1,126 @@
+* {
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+
+/* Login Page */
+
+.title {
+  color: #ffffff;
+  font-size: 2rem; 
+}
+
+.br {
+  border-radius: 5rem 0 0 0;
+}
+
+.bgcolor {
+background: #4022A6;
+}
+
+.part1 {
+  height: 20%;
+}
+
+.part2 {
+  height: 80%;
+}
+
+.form {
+ padding-top: 8rem;
+}
+
+.form-group input {
+  background:transparent;
+  border: none;
+  border-bottom: 2px solid rgb(187, 187, 187);
+  border-radius: 0;
+}
+
+
+ /*---------- Dashboard */
+
+.box1 {
+  background-color: #193044;
+}
+
+.box1 a {
+  text-decoration: none;
+  color: #fff;
+}
+
+
+
+.box1 a div:hover {
+  background-color: #005499;
+}
+
+
+
+
+
+ /*---------- Payment */
+ /* .container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  flex-direction: column;
+  background-color: rgb(255, 245, 232);
+}
+
+button {
+  margin-top: 2rem;
+  padding: 0.8rem 2rem;
+  background: rgb(37, 37, 235);
+  color: white;
+  border: none;
+  border-radius: 0.3rem;
+
+}
+button:hover {
+  background: rgb(0, 0, 189);
+} */
+
+
+
+/*------------- Media queries */
+
+@media ( min-width:768px ) {
+
+  /*---------- Login */
+  .part1 {
+      height: 100vh;
+    }
+    
+    .part2 {
+      height: 100vh;
+    }
+    .title {
+      color: #ffffff;
+      font-size: 3rem; 
+    }
+    
+    .form {
+      padding-top: 0;
+    }
+
+
+     /*---------- Dashboard */
+
+  }
+
+
+@media ( max-width:1024px ) {
+     /*---------- Dashboard */
+
+     .box1 {
+      width: 70%;
+      position: absolute;
+      display: none;
+    }
+
+}
