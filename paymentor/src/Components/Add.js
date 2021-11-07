@@ -21,6 +21,7 @@ const Add = () => {
     const [newClass, setnewClass] = useState();
     const [newDept, setnewDept] = useState();
     const [newCategory, setnewCategory] = useState();
+    const [newFee, setnewFee] = useState();
 
     const createUser = async () => {
         await addDoc(userCollectionRef, { 
@@ -29,7 +30,8 @@ const Add = () => {
             password: newPass, 
             class: newClass,
             department: newDept,
-            category:newCategory
+            category:newCategory,
+            fee: newFee
         }).then(function(){
             alert("Data Saved...!")
         })
@@ -72,7 +74,6 @@ const Add = () => {
 
             } catch(err){
                 alert("Failed")
-                // console.log(Error);
                 console.log(err);
             }
             setLoading(false)   
@@ -88,9 +89,10 @@ const Add = () => {
         <>
             <div className="container-fluid d-flex justify-content-center align-items-center ">
                 <div className=" d-flex flex-column justify-content-center align-items-center">
+                {currentUser && currentUser.email}
+
                 <form onSubmit={handleSubmit}>
                     <div className="div">
-                        {currentUser && currentUser.email}
                         <p><label for="username">Username</label></p>
                         <p><input type="text" name="username" id="username" ref={emailRef} 
                             onChange={(e) => {
@@ -143,6 +145,13 @@ const Add = () => {
                             <option type="text" name="category" value="sc">SC</option>
                             <option type="text" name="category" value="TFWS">TFWS</option>
                             </select></p>
+                    </div>
+                    <div className="div">
+                        <p><label for="department">Fees</label></p>
+                        <p><input type="number" name="fee" id="fee"
+                        onChange={(e) => {
+                            setnewFee(e.target.value);
+                        }}/></p>
                     </div>
                     <div className="div">
                         <p><input className="btn btn-primary " type="submit" name="submit" value="Submit" 
