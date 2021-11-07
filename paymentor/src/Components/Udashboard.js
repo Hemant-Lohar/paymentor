@@ -5,6 +5,7 @@ import {useHistory} from "react-router-dom"
 import Login from './Login';
 import Add from './Add';
 import Update from './update';
+import Payment from './Payment';
 
   const routes = [
     {
@@ -15,11 +16,11 @@ import Update from './update';
     {
       path: "/payment",
       exact: true,
-      main: () => <h1>Pay</h1>
+      main: () => <Payment />
     }
   ];
 
-const Adashboard = () => {
+const Udashboard = () => {
 
     let history = useHistory();
 
@@ -87,7 +88,7 @@ const Adashboard = () => {
     )
 }
 
-export default Adashboard
+export default Udashboard
 
 
 

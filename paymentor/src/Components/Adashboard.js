@@ -6,6 +6,7 @@ import Login from './Login';
 import Add from './Add';
 import Dashboard from './dashboard';
 import Update from './update';
+import { useAuth } from "../contexts/AuthContext"
 
   const routes = [
     {
@@ -34,18 +35,25 @@ const Adashboard = () => {
 
     let history = useHistory();
 
+    const {currentUser } = useAuth()
+
+
+
     return (
         <>
          <Router>
             <div className="container-fluid">
                 <div className="d-flex justify-content-between my-4">
                     <h4 className="ms-4 ">Paymentor</h4>
-                    <button type="button" class="btn btn-outline-primary rounded-pill me-4"
+                    
+                      <p>{currentUser && currentUser.email}
+                      <button type="button" class="btn btn-outline-primary rounded-pill me-4"
                     onClick={
                         () => {
                             history.push('/adminlogin')
-                        } }>Sign Out</button>
+                        } }>Sign Out</button></p>  
                 </div>
+                
 
                 <div className="row vh-100">
                     <div className="box1 vh-100 col-lg-2">
