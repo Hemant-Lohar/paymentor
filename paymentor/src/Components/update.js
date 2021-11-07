@@ -2,23 +2,27 @@
 // import { db } from '../backend/firebase'
 // import { collection, addDoc , getDocs } from "firebase/firestore"
 
-// const Update = () => {
+// // const Update = () => {
 
-//     const userCollectionRef = collection(db ,"User");
+// //     const userCollectionRef = collection(db ,"User");
 
-//     const [users, setUsers] = useState([]);
-//     const [filterUser, setfilterUser] = useState([]);
+// //     const [users, setUsers] = useState([]);
+// //     const [filterUser, setfilterUser] = useState([]);
 
-//     useEffect(() => {
+// //     useEffect(() => {
         
-//         const getUsers = async () => {
-//             const data = await getDocs(userCollectionRef)
-//             setUsers(data.docs.map((doc) => ({...doc.data(), id: doc.username})))
-//         }
+// //         const getUsers = async () => {
+// //             const data = await getDocs(userCollectionRef)
+// //             setUsers(data.docs.map((doc) => ({...doc.data(), id: doc.username})))
+// //         }
 
-//         getUsers()
-//     }, [])
+// //         getUsers()
+// //     }, [])
 
+
+
+    
+// function Update(){
 //     const [newName, setnewName] = useState();
 //     const [newUsername, setnewUsername] = useState();
 //     const [newPass, setnewPass] = useState();
@@ -27,15 +31,15 @@
 //     const [newCategory, setnewCategory] = useState();
 
 //     const display = async (val) => {
-//             users.filter((val) => {
-//                 if(val == "") {
-//                     alert("Enter Correct Value")
-//                 } else if(val.toLowecase() == users.map((user) => {user.username})) {
-//                     setfilterUser(data.docs.map((doc) => ({...doc.data(), id: doc.username})))
-//                 }
-//             })
-//     }
-
+//         users.filter((val) => {
+//             if(val == "") {
+//                 alert("Enter Correct Value")
+//             } else if(val.toLowecase() == users.map((user) => {user.username})) {
+//                 setfilterUser(data.docs.map((doc) => ({...doc.data(), id: doc.username})))
+//             }
+//         })
+// }
+    
 //     return (
 //         <>
 
@@ -116,4 +120,4 @@
 //     )
 // }
 
-// export default Update
+// export default Update;

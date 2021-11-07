@@ -128,6 +128,7 @@ const Add = () => {
                             setnewDept(e.target.value);
                         }}/></p>
                     </div>
+                    
                     <div className="div">
                         <p><label for="category">Category</label></p>
                         {/* <p><input type="text" name="category" id="category" /></p> */}
