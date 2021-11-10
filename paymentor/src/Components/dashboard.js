@@ -33,6 +33,7 @@ const Dashboard = () => {
                             <th className="px-5 py-1 fw-normal bg-light border text-primary">Class</th>
                             <th className="px-5 py-1 fw-normal bg-light border text-primary">Department</th>
                             <th className="px-5 py-1 fw-normal bg-light border text-primary">Category</th>
+                            <th className="px-5 py-1 fw-normal bg-light border text-primary">Fee</th>
                         </tr>
                         
                     
@@ -46,12 +47,13 @@ const Dashboard = () => {
                         { users.map((user) => {
                             return (
                                 <tr>
-                                    <th className="px-5 py-1 fw-normal bg-light border ">{user.username}</th>
-                                    <th className="px-5 py-1 fw-normal bg-light border ">{user.password}</th>
-                                    <th className="px-5 py-1 fw-normal bg-light border ">{user.name}</th>
-                                    <th className="px-5 py-1 fw-normal bg-light border ">{user.class}</th>
+                                    <th className="px-5 py-1 fw-normal bg-light border ">{user.URN}</th>
+                                    <th className="px-5 py-1 fw-normal bg-light border ">{user.Password}</th>
+                                    <th className="px-5 py-1 fw-normal bg-light border ">{user.Name}</th>
+                                    <th className="px-5 py-1 fw-normal bg-light border ">{user.Class}</th>
                                     <th className="px-5 py-1 fw-normal bg-light border ">{user.department}</th>
-                                    <th className="px-5 py-1 fw-normal bg-light border ">{user.category}</th>
+                                    <th className="px-5 py-1 fw-normal bg-light border ">{user.Category}</th>
+                                    <th className="px-5 py-1 fw-normal bg-light border ">{user.Fee}</th>
                                     
                                 </tr>
                                 

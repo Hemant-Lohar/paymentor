@@ -1,43 +1,62 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { db } from '../backend/firebase'
-import { collection, addDoc } from "firebase/firestore"
+//import { db, firestore } from '../backend/firebase'
+//import { collection, addDoc } from "firebase/firestore"
 import { useAuth } from "../contexts/AuthContext"
-
+import firebase from '../backend/firebase'
 
 
 
 const Add = () => {
 
-    const userCollectionRef = collection(db ,"User");
+  //  const userCollectionRef = collection(db ,"User");
 
     const emailRef = useRef()
     const passwordRef = useRef()
     const [error, setError] = useState("")
     const [Loading, setLoading] = useState(false)
 
-    const [newName, setnewName] = useState();
-    const [newUsername, setnewUsername] = useState();
-    const [newPass, setnewPass] = useState();
-    const [newClass, setnewClass] = useState();
-    const [newDept, setnewDept] = useState();
-    const [newCategory, setnewCategory] = useState();
-    const [newFee, setnewFee] = useState();
+    const [newName, setnewName] = React.useState("");
+    const [newUsername, setnewUsername] = React.useState("");
+    const [newPass, setnewPass] = React.useState("");
+    const [newClass, setnewClass] = React.useState("");
+    const [newDept, setnewDept] = React.useState("");
+    const [newCategory, setnewCategory] = React.useState("");
+    const [newFee, setnewFee] = React.useState("");
 
-    const createUser = async () => {
-        await addDoc(userCollectionRef, { 
-            username: newUsername,
-            name: newName ,
-            password: newPass, 
-            class: newClass,
-            department: newDept,
-            category:newCategory,
-            fee: newFee
-        }).then(function(){
-            alert("Data Saved...!")
-        })
-        .catch(function (error) {
-            alert("Error writing Value: ");
-          });
+    const createUser =  () => {
+        // await addDoc(userCollectionRef, { 
+        //     username: newUsername,
+        //     name: newName ,
+        //     password: newPass, 
+        //     class: newClass,
+        //     department: newDept,
+        //     category:newCategory,
+        //     fee: newFee
+        // }).then(function(){
+        //     alert("Data Saved...!")
+        // })
+        // .catch(function (error) {
+        //     alert("Error writing Value: ");
+        //   });
+
+        const db = firebase.firestore();
+        db.collection("User")
+            .doc(newUsername)
+            .set({
+                URN:newUsername,
+                Password:newPass,
+                Name:newName,
+                Class:newClass,
+                department:newDept,
+                Category:newCategory,
+                Fee:newFee
+            })
+            .then(function(){
+                alert("Data Saved...!")
+            })
+            .catch(function (error) {
+                console.error("Error writing Value: ", error);
+              });
     }
 
 
@@ -69,8 +88,8 @@ const Add = () => {
             try {
                 setError("")
                 setLoading(true)
-                await signup(emailRef.current.value, passwordRef.current.value)
-                alert("User added Successfully")
+                // await signup(emailRef.current.value, passwordRef.current.value)
+                // alert("User added Successfully")
 
             } catch(err){
                 alert("Failed")

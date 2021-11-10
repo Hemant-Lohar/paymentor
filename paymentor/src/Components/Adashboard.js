@@ -7,7 +7,9 @@ import Add from './Add';
 import Dashboard from './dashboard';
 import Update from './update';
 import { useAuth } from "../contexts/AuthContext"
+import Delete from './delete';
 
+<<<<<<< HEAD
 //   const routes = [
 //     {
 //       path: "/dashboard",
@@ -30,6 +32,30 @@ import { useAuth } from "../contexts/AuthContext"
 //       main: () => <h2>delete</h2>
 //     }
 //   ];
+=======
+  const routes = [
+    {
+      path: "/dashboard",
+      exact: true,
+      main: () => <Dashboard />
+    },
+    {
+      path: "/add",
+      exact: true,
+      main: () => <Add />
+    },
+    {
+      path: "/update",
+      exact: true,
+      main: () => <Update />
+    },
+    {
+      path: "/delete",
+      exact: true,
+      main: () => <Delete />
+    }
+  ];
+>>>>>>> 40de365977ff13eeae26d37c387bd92e33af8ec6
 
 const Adashboard = () => {
 
