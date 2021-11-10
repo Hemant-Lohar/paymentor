@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { db } from '../backend/firebase'
 import { collection, addDoc , getDocs } from "firebase/firestore"
+import firebase from '../backend/firebase'
 
 // // const Update = () => {
 
@@ -50,22 +51,44 @@ const Update = () => {
     const [users, setUsers] = useState([]);
     const [filterUser, setfilterUser] = useState([]);
 
-    useEffect(() => {
+    // useEffect(() => {
         
-        const getUsers = async () => {
-            const data = await getDocs(userCollectionRef)
-            setUsers(data.docs.map((doc) => ({...doc.data(), id: doc.username})))
-        }
+    //     const getUsers = async () => {
+    //         const data = await getDocs(userCollectionRef)
+    //         setUsers(data.docs.map((doc) => ({...doc.data(), id: doc.username})))
+    //     }
 
-        getUsers()
-    }, [])
+    //     getUsers()
+    // }, [])
 
-    const [newName, setnewName] = useState();
-    const [newUsername, setnewUsername] = useState();
-    const [newPass, setnewPass] = useState();
-    const [newClass, setnewClass] = useState();
-    const [newDept, setnewDept] = useState();
-    const [newCategory, setnewCategory] = useState();
+    const [newName, setnewName] = React.useState("");
+    const [newUsername, setnewUsername] = React.useState("");
+    const [newPass, setnewPass] = React.useState("");
+    const [newClass, setnewClass] = React.useState("");
+    const [newDept, setnewDept] = React.useState("");
+    const [newCategory, setnewCategory] = React.useState("");
+    const [newFee, setnewFee] = React.useState("");
+
+    const updateUser = () =>{
+        const db = firebase.firestore();
+        db.collection("User")
+            .doc(newUsername)
+            .set({
+                URN:newUsername,
+                Password:newPass,
+                Name:newName,
+                Class:newClass,
+                department:newDept,
+                Category:newCategory,
+                Fee:newFee
+            })
+            .then(function(){
+                alert("Data Saved...!")
+            })
+            .catch(function (error) {
+                console.error("Error writing Value: ", error);
+              });
+    }
 
     // const display = async (val) => {
     //         users.filter((val) => {
@@ -89,9 +112,9 @@ const Update = () => {
                         setnewUsername(e.target.value);
                     }}/>
 
-                        <input className="btn btn-primary ms-3" type="submit" name="submit" value="Submit" 
-                        //  onClick={() => {display(newUsername)}}
-                        />
+                        {/* <input className="btn btn-primary ms-3" type="submit" name="submit" value="Submit" 
+                          onClick={() => {display(newUsername)}}
+                        /> */}
                 </div>
                     {/* <div className="div">
                         <p><label for="username">Username</label></p>
@@ -145,8 +168,15 @@ const Update = () => {
                             </select></p>
                     </div>
                     <div className="div">
+                        <p><label for="Fee">Fee</label></p>
+                        <p><input type="text" name="fee" id="fee"
+                        onChange={(e) => {
+                            setnewFee(e.target.value);
+                        }}/></p>
+                    </div>
+                    <div className="div">
                         <p><input className="btn btn-primary " type="submit" name="submit" value="Update" 
-                        //  onClick={() => {updateUser()}}
+                          onClick={() => {updateUser()}}
                          /></p>
                     </div>
                 </div>

@@ -1,7 +1,10 @@
+// import firebase from 'firebase/compat/app';
+// import 'firebase/compat/auth';
+// import { getFirestore } from "@firebase/firestore";
+
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
-import { getFirestore } from "@firebase/firestore";
-
+import 'firebase/compat/firestore';
 
 const firebaseConfig = {
   // apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -10,6 +13,7 @@ const firebaseConfig = {
   // storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
   // messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
   // appId: process.env.REACT_APP_FIREBASE_APP_ID
+
   // apiKey: "AIzaSyDJ9M4kOb1yaa-M0OMpQB1pcg8ZDgRTS_M",
   // authDomain: "paymentor-developement.firebaseapp.com",
   // projectId: "paymentor-developement",
@@ -30,9 +34,9 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = firebase.initializeApp(firebaseConfig);
 export const auth = app.auth();
+export const db = app.firestore(); //getFirestore(app);
 export default app;
 
-export const db = getFirestore(app);
 
 // import firebase from 'firebase/compat/app';
 // import 'firebase/compat/auth';

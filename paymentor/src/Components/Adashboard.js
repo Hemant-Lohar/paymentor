@@ -7,6 +7,7 @@ import Add from './Add';
 import Dashboard from './dashboard';
 import Update from './update';
 import { useAuth } from "../contexts/AuthContext"
+import Delete from './delete';
 
   const routes = [
     {
@@ -27,7 +28,7 @@ import { useAuth } from "../contexts/AuthContext"
     {
       path: "/delete",
       exact: true,
-      main: () => <h2>delete</h2>
+      main: () => <Delete />
     }
   ];
 

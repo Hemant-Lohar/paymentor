@@ -2,6 +2,7 @@ import React, { useRef, useState } from "react"
 import '../index.css';
 import { Link, useHistory } from "react-router-dom"
 import { useAuth } from "../contexts/AuthContext"
+import firebase from "../backend/firebase"
 
 // import {BrowserRouter as Router, Route, Switch} from "react-router-dom"
 // import { useForm } from "react-hook-form";
@@ -13,8 +14,6 @@ import { useAuth } from "../contexts/AuthContext"
 //     password: yup.string().min(4).max(8).required()
 // })
 
-
-
 const Login = () => {
 
     const emailRef = useRef()
@@ -24,14 +23,38 @@ const Login = () => {
     const [loading, setLoading] = useState(false)
     const history = useHistory()
 
+    const[newUsername,setnewUsername]=React.useState("");
+    const[newPassword,setnewPassword]=React.useState("");
+    const[info,setinfo]=useState([]);
+
+    const Oncheck = () =>{
+        const ref= firebase.firestore();
+        ref.collection("User").doc(newUsername).get()
+        .then(snapshot=>
+            check_valid(snapshot,newUsername,newPassword)
+            )
+    }
+    
+    const check_valid = (snapshot,newUsername,newPassword)=>{
+        if(newUsername==snapshot.get("URN") && newPassword == snapshot.get("Password") ){
+            //alert("Yes...!");
+            history.push("/userdashboard");
+           //handleSubmit()
+        } 
+        else{
+            alert("No....!");
+        }
+    } 
+
     async function handleSubmit(e) {
         e.preventDefault()
 
         try {
         setError("")
         setLoading(true)
-        await login(emailRef.current.value, passwordRef.current.value)
-        history.push("/userdashboard")
+        await Oncheck(newUsername,newPassword);
+        //await check_valid(newUsername,newPassword) //(emailRef.current.value, passwordRef.current.value)
+        //history.push("/userdashboard")
         } catch {
         setError("Failed to log in")
         // alert("Enter Valid Username & Password !")
@@ -164,13 +187,18 @@ const Login = () => {
                                 <form className="d-flex flex-column align-items-center" onSubmit={handleSubmit}>
                             
                                         <div class="form-group mb-3">
-                                            <input type="text" class="form-control" name="username" id="username" placeholder="username" ref={emailRef} />
+                                            <input type="text" class="form-control" name="username" id="username" placeholder="username" ref={emailRef} 
+                                            onChange={e=> setnewUsername(e.target.value)}
+                                            />
                                         </div>
                                         <div class="form-group mb-5">
-                                            <input type="password" class="form-control" name="password" id="password" placeholder="password" ref={passwordRef}/>
+                                            <input type="password" class="form-control" name="password" id="password" placeholder="password" ref={passwordRef}
+                                            onChange={e=> setnewPassword(e.target.value)}
+                                            />
                                         </div>
-                                        <input className="btn btn-primary px-4 py-2 w-100" type="button" value="Login" disabled={loading} type="submit"
-                                        />
+                                        {/* <input className="btn btn-primary px-4 py-2 w-100" type="button" value="Login" disabled={loading} type="submit"/> */}
+                                        <button onClick={()=>Oncheck(newUsername,newPassword)} className="btn btn-primary px-4 py-2 w-100" disabled={loading} type="submit">Login</button>
+                                        
                                 </form>
                         </div>
                                 
