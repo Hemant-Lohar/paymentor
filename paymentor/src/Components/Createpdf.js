@@ -9,10 +9,10 @@ const Createpdf = () => {
     const [price1, setprice1] = useState()
     const [price2, setprice2] = useState()
     const [info, setinfo] = useState({
-        name: "",
-        price1: 0,
-        price2: 0,
-        receiptid: 0
+        name: setName,
+        price1: setprice1,
+        price2: setprice2,
+        receiptid: setreceipt
     })
 
 
@@ -56,14 +56,14 @@ const Createpdf = () => {
                             <p><label for="price1">p1</label></p>
                             <p><input type="number" name="price1" id="username"
                                 onChange={(e) => {
-                                    setinfo.price1(e.target.value);
+                                    setprice1(e.target.value);
                                 }}/></p>
                 </div>
                 <div className="div">
                             <p><label for="price2">p2</label></p>
                             <p><input type="number" name="price2" id="username"
                                 onChange={(e) => {
-                                    setinfo.price2(e.target.value);
+                                    setprice2(e.target.value);
                                 }}/></p>
                 </div>
                            {/* <button className="btn btn-primary px-4 py-2" 

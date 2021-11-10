@@ -9,12 +9,8 @@
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
     "axios": "^0.24.0",
-<<<<<<< HEAD
     "file-saver": "^2.0.5",
-    "firebase": "^9.2.0",
-=======
     "firebase": "^9.3.0",
->>>>>>> 40de365977ff13eeae26d37c387bd92e33af8ec6
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-hook-form": "^7.18.0",

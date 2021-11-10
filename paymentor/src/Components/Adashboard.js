@@ -9,7 +9,7 @@ import Update from './update';
 import { useAuth } from "../contexts/AuthContext"
 import Delete from './delete';
 
-<<<<<<< HEAD
+
 //   const routes = [
 //     {
 //       path: "/dashboard",
@@ -32,7 +32,6 @@ import Delete from './delete';
 //       main: () => <h2>delete</h2>
 //     }
 //   ];
-=======
   const routes = [
     {
       path: "/dashboard",
@@ -55,7 +54,6 @@ import Delete from './delete';
       main: () => <Delete />
     }
   ];
->>>>>>> 40de365977ff13eeae26d37c387bd92e33af8ec6
 
 const Adashboard = () => {
 
