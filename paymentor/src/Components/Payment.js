@@ -59,7 +59,7 @@ const Payment = () => {
         //         console.log(err);
         //     })
 
-        axios.post('http://localhost:8000/razorpay',{"input": amount}).then((info) => {
+        axios.post('http://localhost:8000/razorpay',1234).then((info) => {
 
         
         setorderId(info.data.id)

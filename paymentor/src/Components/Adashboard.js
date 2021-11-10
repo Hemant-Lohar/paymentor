@@ -8,28 +8,28 @@ import Dashboard from './dashboard';
 import Update from './update';
 import { useAuth } from "../contexts/AuthContext"
 
-  const routes = [
-    {
-      path: "/dashboard",
-      exact: true,
-      main: () => <Dashboard />
-    },
-    {
-      path: "/add",
-      exact: true,
-      main: () => <Add />
-    },
-    {
-      path: "/update",
-      exact: true,
-      main: () => <Update />
-    },
-    {
-      path: "/delete",
-      exact: true,
-      main: () => <h2>delete</h2>
-    }
-  ];
+//   const routes = [
+//     {
+//       path: "/dashboard",
+//       exact: true,
+//       main: () => <Dashboard />
+//     },
+//     {
+//       path: "/add",
+//       exact: true,
+//       main: () => <Add />
+//     },
+//     {
+//       path: "/update",
+//       exact: true,
+//       main: () => <Update />
+//     },
+//     {
+//       path: "/delete",
+//       exact: true,
+//       main: () => <h2>delete</h2>
+//     }
+//   ];
 
 const Adashboard = () => {
 
@@ -65,14 +65,14 @@ const Adashboard = () => {
                     </div>
    
                             <div className="slidebar d-flex flex-column mt-5">
-                            <Link to="/dashboard" >
+                            <Link to="/admindashboard" >
                                 <div className="px-2 py-2 ">
                                     Dashboard
                                 </div>
                                 <hr />
                             </Link>
                             
-                            <Link to="/add" >
+                            <Link to="/admindashboard/add" >
                                 <div className="px-2 py-2 ">
                                     Add Student Data
                                 </div>
@@ -97,17 +97,19 @@ const Adashboard = () => {
                         <div className="d-flex justify-content-end">
   
                         </div>
-                        <Switch>
+                        <Route exact path="/admindashboard" component={Dashboard} />
+                        <Route  path="/admindashboard/add" component={Add} />
+                        {/* <Switch>
                             {routes.map((route, index) => (
                             
                                 <Route
                                     key={index}
                                     path={route.path}
                                     exact={route.exact}
-                                    children={<Route exact path={route.path} component={route.main}/>}
+                                    children={<route.main/>}
                                 />
                             ))}
-                        </Switch>
+                        </Switch> */}
                     </div>
                 </div>
             </div>

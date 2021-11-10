@@ -6,6 +6,8 @@ import {BrowserRouter as Router, Route, Switch} from "react-router-dom"
 import {useHistory} from "react-router-dom"
 import Adlogin from "./Components/Alogin";
 import { AuthProvider } from "./contexts/AuthContext";
+import Dashboard from "./Components/dashboard";
+import Createpdf from "./Components/Createpdf";
 
 
 
@@ -20,6 +22,7 @@ function App() {
           <Route exact path="/adminlogin" component={Adminlogin}/>
           <Route exact path="/userdashboard" component={Udashboard}/>
           <Route exact path="/admindashboard" component={Adashboard}/>
+          <Route exact path="/pdf" component={Createpdf}/>
         </Switch>
       </Router>
     </AuthProvider>

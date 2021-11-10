@@ -5,6 +5,8 @@ const shortid = require('shortid')
 const cors = require('cors')
 const bodyParser = require('body-parser')
 
+const pdf = require('html-pdf')
+const pdfTemplate = require('./document');
 // const  db = require ('firebase')
 // const collection = ("firebase/firestore")
 // var firebase = require("firebase");
@@ -29,9 +31,9 @@ const bodyParser = require('body-parser')
 // })
 
 const app = express()
+app.use(cors())
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(cors())
 
 const razorpay = new Razorpay ({
     key_id:'rzp_test_92sXJEdsMzESab',
@@ -49,7 +51,6 @@ app.post('/razorpay', async (req, res) => {
     const payment_capture=1
     const amt = req.body
     const curr = 'INR'
-    console.log(req.body);
     
     const options = {
         amount: amt * 100,
@@ -72,6 +73,29 @@ app.post('/razorpay', async (req, res) => {
 // app.get('/razorpay', async(req, res) => {
 //         console.log(res);
 // })
+
+
+// ----------Pdf Create
+
+
+//post
+app.post('/create-pdf', (req, res) => {
+    pdf.create(pdfTemplate(req.body), {}).toFile('result.pdf', (err) => {
+        if(err) {
+            res.send(Promise.reject());
+        }
+
+        res.send(Promise.resolve());
+    });
+});
+
+//get
+
+app.get('/fetch-pdf', (req, res) => {
+    res.sendFile(`${__dirname}/result.pdf`)
+})
+
+
 
 app.get("/", (req, res) => {
     res.send("Hi there !")
