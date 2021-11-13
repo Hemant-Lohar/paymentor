@@ -1,9 +1,12 @@
 import React, { useRef, useState } from "react"
  import axios from "axios"
+ import Generatepdf from "./Generatepdf"
+ import { useAuth } from "../contexts/AuthContext"
+import firebase from '../backend/firebase'
+
 //  import { db } from '../backend/firebase'
 //  import { collection, getDocs,doc, getDoc } from "firebase/firestore"
  
-
  function loadScript(src) {
 
     return new Promise(resolve => {
@@ -24,14 +27,18 @@ import React, { useRef, useState } from "react"
 }
 
 
-
-
 const Payment = () => {
 
     const [amount, setamount] = useState()
-    const [orderId, setorderId] = useState()
     const [feeamount, setfeeamount] = useState()
+    const [orderId, setorderId] = useState("")
+    const [paymentId, setpaymentId] = useState("")
 
+    const currDate = new Date().toLocaleDateString()
+    const currTime = new Date().toLocaleTimeString()
+
+    const { currentUser } = useAuth()
+    const namestr = currentUser &&currentUser.email
 
     // const [paydata, setpaydata] = useState([])
     // const [userDetails, setUserDetails] = useState('')
@@ -59,19 +66,14 @@ const Payment = () => {
         //         console.log(err);
         //     })
 
-        axios.post('http://localhost:8000/razorpay',1234).then((info) => {
+        axios.post('http://localhost:8000/razorpay',{amt:amount}).then((info) => {
 
         
         setorderId(info.data.id)
         
-        alert(orderId);
-        alert(info.data.id);
-        alert(amount)
-
-    
-
-
-        
+        // alert(orderId);
+        // alert(info.data.id);
+        // alert(amount)
         
         
         var options = {
@@ -86,6 +88,28 @@ const Payment = () => {
                 alert(response.razorpay_payment_id);
                 alert(response.razorpay_order_id);
                 alert(response.razorpay_signature);
+
+                setorderId(response.razorpay_order_id)
+                setpaymentId(response.razorpay_payment_id)
+
+                const db = firebase.firestore();
+                db.collection("Payment")
+                .doc(namestr.slice(0,-14))
+                .set({
+                URN:namestr.slice(0,-14),
+                Amount:amount,
+                Date:currDate,
+                OrderId:response.razorpay_order_id,
+                PaymentId:response.razorpay_payment_id,
+                Time:currTime
+                })
+                .then(function(){
+                    alert("Data Saved...!")
+                })
+                .catch(function (error) {
+                    console.error("Error writing Value: ", error);
+                });
+
             },
             "prefill": {
                 //  name
@@ -110,31 +134,38 @@ const Payment = () => {
         //             console.log(error);
         //         })
         // }
-    
-   
-        
-        
-
-
             
     }
-
-
 
     return (
         <>
             
-            <p>Payment Page </p>
-                <div className="div">
-                            <p><label for="inputAmount">Enter Amount </label></p>
-                            <p><input type="text" name="inputAmount" id="inputAmount" required
-                            onChange={(e) => {
-                                setamount(e.target.value);
-                            }}/></p>
+                <div className="container">
+                    <div className="d-flex align-items-center justify-content-center">
+                        <div className="div">
+                            <p>Fee Payment</p>
+
+                                    <p><label for="inputAmount">Enter Amount </label></p>
+                                    <p><input type="text" name="inputAmount" id="inputAmount" required
+                                    onChange={(e) => {
+                                        setamount(e.target.value);
+                                    }}/>
+                                    <button className="btn btn-primary rounded-pill px-4 ms-4"
+                                        onClick={dispalyRazorpay}
+                                    >Pay</button>
+                                    </p>
+
+                                    <div className="d-flex align-items-center justify-content-center flex-column mt-5">
+                                        <p>Generate Receipt</p>
+                                        <Generatepdf />
+                                        {/* <button className="btn btn-success rounded-pill px-4"
+                                            onClick={dispalyRazorpay}
+                                        >Generate</button> */}
+                                    </div>
                         </div>
-                <button className="btn btn-primary rounded-pill px-4 ms-5" 
-                    onClick={dispalyRazorpay}
-                >Pay</button>
+                    </div>
+                    
+                </div>
         </>
     )
 }

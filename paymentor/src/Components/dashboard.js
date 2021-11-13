@@ -21,9 +21,9 @@ const Dashboard = () => {
 
     return (
         <>
-           <div className="bg-light vh-100">
+           <div className="bg-light vh-100 container-fluid">
                 
-                    <div className="div">
+                    <div className="overflow-scroll">
 
                     <table className="text-center px-2">
                         <tr className="px-2">

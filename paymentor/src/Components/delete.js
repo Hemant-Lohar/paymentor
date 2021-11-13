@@ -36,23 +36,19 @@ const Delete = () =>{
 
     return(
         <div className="container-fluid d-flex justify-content-center align-items-center ">
-            <div className=" d-flex flex-column justify-content-center align-items-center">
-                <div>
-                    <p>
-                        Delete Student:
-                    </p>
-                </div>
-            <div className="div">
-                <label className="me-2" for="username">Username</label>
+            <div className=" d-flex flex-column justify-content-center align-items-start">
+            
+                <p>Delete Student</p>
+                <label className="me-2" for="username">Username :</label>
                 <input type="text" name="username" id="username" 
                     onChange={(e) => {
                         setnewUsername(e.target.value);
                     }}/>
 
-                        <input className="btn btn-primary ms-3" type="submit" name="submit" value="Submit" 
+                    <input className="btn btn-primary my-4" type="submit" name="submit" value="Submit" 
                           onClick={Ondelete}
-                        />
-                </div>
+                    />
+              
             </div>
         </div>
     )

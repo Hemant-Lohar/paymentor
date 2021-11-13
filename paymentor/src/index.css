@@ -39,11 +39,23 @@ background: #4022A6;
   border-radius: 0;
 }
 
+.login-btn {
+  position: absolute; 
+  top: 0; 
+  right: 0; 
+  margin: 20px 20px;
+}
 
  /*---------- Dashboard */
 
 .box1 {
   background-color: #193044;
+  transition: 400ms;
+}
+
+.active {
+  margin-left: -200px;
+  transition: 400ms;
 }
 
 .box1 a {
@@ -56,9 +68,6 @@ background: #4022A6;
 .box1 a div:hover {
   background-color: #005499;
 }
-
-
-
 
 
  /*---------- Payment */
@@ -107,6 +116,11 @@ button:hover {
     .form {
       padding-top: 0;
     }
+    .active {
+      margin-left: -200px;
+      transition: 400ms;
+    }
+    
 
 
      /*---------- Dashboard */
@@ -120,7 +134,29 @@ button:hover {
      .box1 {
       width: 70%;
       position: absolute;
-      display: none;
     }
+    .active {
+      margin-left: -230px;
+      transition: 400ms;
+    }
+    .login-btn {
+      position: relative;
+      margin-top: 20px;
+      margin-left: 250px;
+    }
+    .box2 {
+      margin-left: 20px;
+    }
+    
+    
+
+}
+
+@media ( max-width:400px ) {
+  /*---------- Dashboard */
+ .active {
+   margin-left: -200px;
+   transition: 400ms;
+ }
 
 }

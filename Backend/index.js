@@ -7,6 +7,7 @@ const bodyParser = require('body-parser')
 
 const pdf = require('html-pdf')
 const pdfTemplate = require('./document');
+const { info } = require('console')
 // const  db = require ('firebase')
 // const collection = ("firebase/firestore")
 // var firebase = require("firebase");
@@ -43,14 +44,15 @@ const razorpay = new Razorpay ({
 const port= 8000;
 
 app.get('/logo.svg', (req, res) => {
-    res.sendFile(path.join(__dirname, './logo.svg'))
+    res.sendFile(path.join(__dirname, './paymentor.svg'))
 })
 
 
 app.post('/razorpay', async (req, res) => {
     const payment_capture=1
-    const amt = req.body
+    const amt = req.body.amt
     const curr = 'INR'
+    console.log(amt);
     
     const options = {
         amount: amt * 100,
@@ -75,7 +77,7 @@ app.post('/razorpay', async (req, res) => {
 // })
 
 
-// ----------Pdf Create
+// ----------Pdf Create-------
 
 
 //post

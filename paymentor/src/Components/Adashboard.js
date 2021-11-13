@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import '../index.css';
 import {BrowserRouter as Router, Route, Switch, Link} from "react-router-dom"
 import {useHistory} from "react-router-dom"
@@ -34,61 +34,71 @@ import Delete from './delete';
 //   ];
   const routes = [
     {
-      path: "/dashboard",
+      path: "/admindashboard",
       exact: true,
       main: () => <Dashboard />
     },
     {
-      path: "/add",
+      path: "/admindashboard/add",
       exact: true,
       main: () => <Add />
     },
     {
-      path: "/update",
+      path: "/admindashboard/update",
       exact: true,
       main: () => <Update />
     },
     {
-      path: "/delete",
+      path: "/admindashboard/delete",
       exact: true,
       main: () => <Delete />
     }
   ];
 
 const Adashboard = () => {
-
+    const width = 800;
     let history = useHistory();
-
     const {currentUser } = useAuth()
 
+    const [toggler, settoggler] = useState(false)
 
-
+    const toggle = () => settoggler(!toggler)
+    const show = () => {
+        if (width <1024) {
+            settoggler(!toggler)
+        }
+    }
+    
     return (
         <>
          <Router>
             <div className="container-fluid">
-                <div className="d-flex justify-content-between my-4">
-                    <h4 className="ms-4 ">Paymentor</h4>
+                <div className="d-flex justify-content-between mt-4">
+                    <h4 className="ms-4">Paymentor</h4>
                     
-                      <p>{currentUser && currentUser.email}
-                      <button type="button" class="btn btn-outline-primary rounded-pill me-4"
-                    onClick={
+                      {/* {currentUser && currentUser.email} */}<p> 
+                      <button type="button" class="btn btn-outline-primary rounded-pill"
+                        onClick={
                         () => {
                             history.push('/adminlogin')
                         } }>Sign Out</button></p>  
                 </div>
                 
 
-                <div className="row vh-100">
-                    <div className="box1 vh-100 col-lg-2">
+                <div className="bg-light row vh-100">
+                    <div className={toggler ?"box1 vh-100 col-lg-2":"box1 vh-100 col-lg-2 active"}>
 
                     <div className="position-relative close-btn">
-                        <i className="fas fa-times text-info fs-4 position-absolute top-0 end-0 mt-3 me-2">
-                            
+                    {toggler ?<i className="fas fa-times text-info fs-4 position-absolute top-0 end-0 mt-3 me-2" onClick={toggle}>
+                        
+                        </i> :
+                        <i className="fas fa-bars text-info fs-4 position-absolute top-0 end-0 mt-3 me-2" onClick={toggle}>
+                        
                         </i>
+                        }
                     </div>
    
-                            <div className="slidebar d-flex flex-column mt-5">
+                    {toggler ? <div className="slidebar d-flex flex-column mt-5" onClick={show}>
                             <Link to="/admindashboard" >
                                 <div className="px-2 py-2 ">
                                     Dashboard
@@ -102,28 +112,28 @@ const Adashboard = () => {
                                 </div>
                                 <hr />
                             </Link>
-                            <Link to="/update" >
+                            <Link to="/admindashboard/update" >
                                 <div className="px-2 py-2 ">
                                     Update Student Data
                                 </div>
                                 <hr />
                             </Link>
-                            <Link to="/delete" >
+                            <Link to="/admindashboard/delete" >
                                 <div className="px-2 py-2 ">
                                     Delete Student Data
                                 </div>
                                 <hr />
                             </Link>
-                            </div>
+                            </div> : null}
                     </div>
 
                     <div className="box2 px-0 col-lg-10">
                         <div className="d-flex justify-content-end">
   
                         </div>
-                        <Route exact path="/admindashboard" component={Dashboard} />
-                        <Route  path="/admindashboard/add" component={Add} />
-                        {/* <Switch>
+                        {/* <Route exact path="/admindashboard" component={Dashboard} />
+                        <Route  path="/admindashboard/add" component={Add} /> */}
+                        <Switch>
                             {routes.map((route, index) => (
                             
                                 <Route
@@ -133,7 +143,7 @@ const Adashboard = () => {
                                     children={<route.main/>}
                                 />
                             ))}
-                        </Switch> */}
+                        </Switch>
                     </div>
                 </div>
             </div>

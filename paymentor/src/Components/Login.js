@@ -23,38 +23,20 @@ const Login = () => {
     const [loading, setLoading] = useState(false)
     const history = useHistory()
 
-    const[newUsername,setnewUsername]=React.useState("");
-    const[newPassword,setnewPassword]=React.useState("");
+    const[newUsername,setnewUsername]=useState("");
+    const[newPassword,setnewPassword]=useState("");
     const[info,setinfo]=useState([]);
 
-    const Oncheck = () =>{
-        const ref= firebase.firestore();
-        ref.collection("User").doc(newUsername).get()
-        .then(snapshot=>
-            check_valid(snapshot,newUsername,newPassword)
-            )
-    }
+    // 
     
-    const check_valid = (snapshot,newUsername,newPassword)=>{
-        if(newUsername==snapshot.get("URN") && newPassword == snapshot.get("Password") ){
-            //alert("Yes...!");
-            history.push("/userdashboard");
-           //handleSubmit()
-        } 
-        else{
-            alert("No....!");
-        }
-    } 
-
     async function handleSubmit(e) {
         e.preventDefault()
 
         try {
         setError("")
         setLoading(true)
-        await Oncheck(newUsername,newPassword);
-        //await check_valid(newUsername,newPassword) //(emailRef.current.value, passwordRef.current.value)
-        //history.push("/userdashboard")
+        await login(emailRef.current.value, passwordRef.current.value)
+        history.push("/userdashboard")
         } catch {
         setError("Failed to log in")
         // alert("Enter Valid Username & Password !")
@@ -155,7 +137,27 @@ const Login = () => {
 // //     const onSubmit = (data) => {
 // //         console.log(data);
 // //     };
+const checkOnlineStatus = async () => {
+    try {
+      const online = await fetch("/1pixel.png");
+      return online.status >= 200 && online.status < 300; // either true or false
+    } catch (err) {
+      return false; // definitely offline
+    }
+  };
+//   setInterval(async () => {
+//   const result = await checkOnlineStatus();
+//   const statusDisplay = document.getElementById("status");
+//   statusDisplay.textContent = result ? "Online" : "OFFline";
+// }, 3000); // probably too often, try 30000 for every 30 seconds
+window.addEventListener("load", async (event) => {
+    const status = ""
+      status = (await checkOnlineStatus())
+      ? "Online"
+      : "OFFline";
 
+      setError(status)
+  });
                         
     return (
         <>
@@ -163,8 +165,8 @@ const Login = () => {
                
                <div className="bgcolor row vh-100">
                 
-                    <div className="part1 col-md-6 d-flex justify-content-center align-items-center">
-                        
+                    <div className="part1 col-md-6 d-flex flex-column justify-content-center align-items-center">
+                        {/* <img src="/paylogo.svg" alt="logo" className="w-50" /> */}
                         <h1 className="title fw-bold"><span className="fw-light">ADCET </span> Paymentor</h1>
                         
                     </div>
@@ -172,7 +174,7 @@ const Login = () => {
                     <div className="part2 col-md-6 bg-white br d-flex flex-column justify-content-start justify-content-md-center align-items-center">
                    
                         
-                          <button type="button" className="btn btn-outline-primary rounded-pill position-absolute top-0 end-0 mx-4 my-4" 
+                          <button type="button" className="btn login-btn btn-outline-primary rounded-pill" 
                           onClick={() => {history.push('/adminlogin')}} >Admin Login</button>
                     
                     
@@ -196,9 +198,9 @@ const Login = () => {
                                             onChange={e=> setnewPassword(e.target.value)}
                                             />
                                         </div>
-                                        {/* <input className="btn btn-primary px-4 py-2 w-100" type="button" value="Login" disabled={loading} type="submit"/> */}
-                                        <button onClick={()=>Oncheck(newUsername,newPassword)} className="btn btn-primary px-4 py-2 w-100" disabled={loading} type="submit">Login</button>
-                                        
+                                        <input className="btn btn-primary px-4 py-2 w-100" type="button" value="Login" disabled={loading} type="submit"/>
+                                        {/* <button onClick={()=>Oncheck(newUsername,newPassword)} className="btn btn-primary px-4 py-2 w-100" disabled={loading} type="submit">Login</button>
+                                         */}
                                 </form>
                         </div>
                                 

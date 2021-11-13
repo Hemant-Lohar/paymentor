@@ -1,4 +1,4 @@
-module.exports = ({ name, price1, price2, receiptId }) => {
+module.exports = ({fee, name, receiptId}) => {
     const today = new Date();
 return `
     <!doctype html>
@@ -7,6 +7,12 @@ return `
           <meta charset="utf-8">
           <title>PDF Result Template</title>
           <style>
+             *{
+               font-family: 'Poppins', sans-serif;
+             }
+             body{
+                margin-top:80px;
+             }
              .invoice-box {
              max-width: 800px;
              margin: auto;
@@ -86,10 +92,10 @@ return `
                    <td colspan="2">
                       <table>
                          <tr>
-                            <td class="title"><img  src="https://i2.wp.com/cleverlogos.co/wp-content/uploads/2018/05/reciepthound_1.jpg?fit=800%2C600&ssl=1"
+                            <td class="title"><img  src="http://localhost:8000/logo.svg"
                                style="width:100%; max-width:156px;"></td>
                             <td>
-                               Datum: ${`${today.getDate()}. ${today.getMonth() + 1}. ${today.getFullYear()}.`}
+                               Date : ${`${today.getDate()}. ${today.getMonth() + 1}. ${today.getFullYear()}.`}
                             </td>
                          </tr>
                       </table>
@@ -100,30 +106,27 @@ return `
                       <table>
                          <tr>
                             <td>
-                               Customer name: ${name}
+                               Payer name : ${name}<br/>
+                              
                             </td>
                             <td>
-                               Receipt number: ${receiptId}
+                               Receipt number : ${receiptId}
                             </td>
                          </tr>
                       </table>
                    </td>
                 </tr>
                 <tr class="heading">
-                   <td>Bought items:</td>
-                   <td>Price</td>
+                   <td>Fees paid :</td>
+                   <td>Amount</td>
                 </tr>
                 <tr class="item">
-                   <td>First item:</td>
-                   <td>${price1}$</td>
-                </tr>
-                <tr class="item">
-                   <td>Second item:</td>
-                   <td>${price2}$</td>
+                   <td>Exam Fee :</td>
+                   <td>${fee} Rs.</td>
                 </tr>
              </table>
              <br />
-             <h1 class="justify-center">Total price: ${parseInt(price1) + parseInt(price2)}$</h1>
+             <h1 class="justify-center">Total Fees Paid : ${fee} Rs.</h1>
           </div>
        </body>
     </html>

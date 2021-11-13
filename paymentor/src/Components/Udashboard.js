@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import '../index.css';
 import {BrowserRouter as Router, Route, Switch, Link} from "react-router-dom"
 import {useHistory} from "react-router-dom"
@@ -18,12 +18,20 @@ import Payment from './Payment';
       exact: true,
       main: () => <Payment />
     }
+    
   ];
 
 const Udashboard = () => {
-
+    const width=800;
     let history = useHistory();
+    const [toggler, settoggler] = useState(false)
 
+    const toggle = () => settoggler(!toggler)
+    const show = () => {
+        if (width <1024) {
+            settoggler(!toggler)
+        }
+    }
     return (
         <>
          <Router>
@@ -34,19 +42,23 @@ const Udashboard = () => {
                     onClick={
                         () => {
                             history.push('/adminlogin')
-                        } }>Sign Out</button>
+                        }}>Sign Out</button>
                 </div>
 
                 <div className="row vh-100">
-                    <div className="box1 vh-100 col-lg-2">
+                    <div className={toggler ?"box1 vh-100 col-lg-2":"box1 vh-100 col-lg-2 active"}>
 
                     <div className="position-relative close-btn">
-                        <i className="fas fa-times text-info fs-4 position-absolute top-0 end-0 mt-3 me-2">
-                            
+                    {toggler ?<i className="fas fa-times text-info fs-4 position-absolute top-0 end-0 mt-3 me-2" onClick={toggle}>
+                        
+                        </i> :
+                        <i className="fas fa-bars text-info fs-4 position-absolute top-0 end-0 mt-3 me-2" onClick={toggle}>
+                        
                         </i>
+                        }
                     </div>
    
-                            <div className="slidebar d-flex flex-column mt-5">
+                    {toggler ?<div className="slidebar d-flex flex-column mt-5">
                             <Link to="/userdetails" >
                                 <div className="px-2 py-2 ">
                                     Dashboard
@@ -61,13 +73,11 @@ const Udashboard = () => {
                                 <hr />
                             </Link>
                            
-                            </div>
+                            </div> : null}
                     </div>
 
                     <div className="box2 px-0 col-lg-10">
-                        <div className="d-flex justify-content-end">
-  
-                        </div>
+                        <div className="d-flex justify-content-center">
                         <Switch>
                             {routes.map((route, index) => (
                             
@@ -80,6 +90,8 @@ const Udashboard = () => {
                                 />
                             ))}
                         </Switch>
+                        </div>
+                        
                     </div>
                 </div>
             </div>

@@ -4,18 +4,15 @@ import { saveAs } from "file-saver"
 
 const Createpdf = () => {
 
-    const [Name, setName] = useState()
-    const [receipt, setreceipt] = useState()
-    const [price1, setprice1] = useState()
-    const [price2, setprice2] = useState()
+    
     const [info, setinfo] = useState({
-        name: setName,
-        price1: setprice1,
-        price2: setprice2,
-        receiptid: setreceipt
+        name: "",
+        receiptid: 0,
+        price1: 0,
+        price2: 0
     })
 
-
+console.log(info);
 
 
 
@@ -42,28 +39,28 @@ const Createpdf = () => {
                             <p><label for="username">Username</label></p>
                             <p><input type="text" name="name" id="username"
                                 onChange={(e) => {
-                                    setName(e.target.value);
+                                    setinfo({...info, name: e.target.value});
                                 }}/></p>
                 </div>
                 <div className="div">
                             <p><label for="receiptid">rid</label></p>
                             <p><input type="number" name="receiptid" id="username"
                                 onChange={(e) => {
-                                    setreceipt(e.target.value);
+                                    setinfo({...info, receiptid: e.target.value});
                                 }}/></p>
                 </div>
                 <div className="div">
                             <p><label for="price1">p1</label></p>
                             <p><input type="number" name="price1" id="username"
                                 onChange={(e) => {
-                                    setprice1(e.target.value);
+                                    setinfo({...info, price1: e.target.value});
                                 }}/></p>
                 </div>
                 <div className="div">
                             <p><label for="price2">p2</label></p>
                             <p><input type="number" name="price2" id="username"
                                 onChange={(e) => {
-                                    setprice2(e.target.value);
+                                    setinfo({...info, price2: e.target.value});
                                 }}/></p>
                 </div>
                            {/* <button className="btn btn-primary px-4 py-2" 

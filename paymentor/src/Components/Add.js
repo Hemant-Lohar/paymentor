@@ -44,7 +44,7 @@ const Add = () => {
             .doc(newUsername)
             .set({
                 URN:newUsername,
-                Password:newPass,
+                Password:"user@321",
                 Name:newName,
                 Class:newClass,
                 department:newDept,
@@ -56,7 +56,7 @@ const Add = () => {
             })
             .catch(function (error) {
                 console.error("Error writing Value: ", error);
-              });
+            });
     }
 
 
@@ -88,8 +88,8 @@ const Add = () => {
             try {
                 setError("")
                 setLoading(true)
-                // await signup(emailRef.current.value, passwordRef.current.value)
-                // alert("User added Successfully")
+                await signup(emailRef.current.value+"@paymentor.com", "user@321")
+                alert("User added Successfully")
 
             } catch(err){
                 alert("Failed")
@@ -161,7 +161,7 @@ const Add = () => {
                             <option type="text" name="category" value="OPEN">OPEN</option>
                             <option type="text" name="category" value="OBC">OBC</option>
                             <option type="text" name="category" value="NT">NT</option>
-                            <option type="text" name="category" value="sc">SC</option>
+                            <option type="text" name="category" value="SC">SC</option>
                             <option type="text" name="category" value="TFWS">TFWS</option>
                             </select></p>
                     </div>

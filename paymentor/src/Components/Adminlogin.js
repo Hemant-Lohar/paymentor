@@ -14,6 +14,8 @@ const Adminlogin = () => {
     const [loading, setLoading] = useState(false)
     const history = useHistory()
 
+    const { signup, currentUser } = useAuth()
+
     async function handleSubmit(e) {
         e.preventDefault()
 
@@ -24,7 +26,7 @@ const Adminlogin = () => {
         history.push("/admindashboard")
         } catch {
         setError("Failed to log in")
-        // alert("Enter Valid Username & Password !")
+        alert("Enter Valid Username & Password !")
         }
 
         setLoading(false)
@@ -45,7 +47,7 @@ const Adminlogin = () => {
                     <div className="part2 col-md-6 bg-white br d-flex flex-column justify-content-start justify-content-md-center align-items-center">
                    
                         
-                        <button type="button" className="btn btn-outline-primary rounded-pill position-absolute top-0 end-0 mx-4 my-4" 
+                        <button type="button" className="btn login-btn btn-outline-primary rounded-pill" 
                           onClick={() => {history.push('/')}} >User Login</button>
                     
                         <div className="form">
