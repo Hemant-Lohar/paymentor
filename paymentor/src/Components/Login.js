@@ -3,6 +3,7 @@ import '../index.css';
 import { Link, useHistory } from "react-router-dom"
 import { useAuth } from "../contexts/AuthContext"
 import firebase from "../backend/firebase"
+import CryptoJS from "crypto-js";
 
 // import {BrowserRouter as Router, Route, Switch} from "react-router-dom"
 // import { useForm } from "react-hook-form";
@@ -27,24 +28,28 @@ const Login = () => {
     const[newPassword,setnewPassword]=useState("");
     const[info,setinfo]=useState([]);
 
-    //     const Oncheck = () =>{
-    //     const ref= firebase.firestore();
-    //     ref.collection("User").doc(newUsername).get()
-    //     .then(snapshot=>
-    //         check_valid(snapshot,newUsername,newPassword)
-    //         )
-    // }
+        const Oncheck = () =>{
+        const ref= firebase.firestore();
+        ref.collection("User").doc(newUsername).get()
+        .then(snapshot=>
+            check_valid(snapshot,newUsername,newPassword)
+            )
+    }
     
-    // const check_valid = (snapshot,newUsername,newPassword)=>{
-    //     if(newUsername==snapshot.get("URN") && newPassword == snapshot.get("Password") ){
-    //         //alert("Yes...!");
-    //         history.push("/userdashboard");
-    //        //handleSubmit()
-    //     } 
-    //     else{
-    //         alert("No....!");
-    //     }
-    // } 
+    const check_valid = (snapshot,newUsername,newPassword)=>{
+
+        const bytes = CryptoJS.AES.decrypt(snapshot.get("Password"),'my-secret-key@123');
+        const decryptedData = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
+
+        if(newUsername==snapshot.get("URN") && newPassword == decryptedData ){
+            //alert("Yes...!");
+            history.push("/userdashboard");
+           //handleSubmit()
+        } 
+        else{
+            alert("No....!");
+        }
+    } 
 
     // async function handleSubmit(e) {
     //     e.preventDefault()
@@ -69,8 +74,8 @@ const Login = () => {
         try {
         setError("")
         setLoading(true)
-        await login(emailRef.current.value, passwordRef.current.value)
-        history.push("/userdashboard")
+        // await login(emailRef.current.value, passwordRef.current.value)
+        // history.push("/userdashboard")
         } catch {
         setError("Failed to log in")
         // alert("Enter Valid Username & Password !")
@@ -232,9 +237,9 @@ window.addEventListener("load", async (event) => {
                                             onChange={e=> setnewPassword(e.target.value)}
                                             />
                                         </div>
-                                        <input className="btn btn-primary px-4 py-2 w-100" type="button" value="Login" disabled={loading} type="submit"/>
-                                        {/* <button onClick={()=>Oncheck(newUsername,newPassword)} className="btn btn-primary px-4 py-2 w-100" disabled={loading} type="submit">Login</button>
-                                         */}
+                                        {/* <input className="btn btn-primary px-4 py-2 w-100" type="button" value="Login" disabled={loading} type="submit"/> */}
+                                        <button onClick={()=>Oncheck(newUsername,newPassword)} className="btn btn-primary px-4 py-2 w-100" disabled={loading} type="submit">Login</button>
+                                        
                                 </form>
                         </div>
                                 

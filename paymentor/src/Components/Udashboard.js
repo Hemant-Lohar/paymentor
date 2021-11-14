@@ -6,6 +6,7 @@ import Login from './Login';
 import Add from './Add';
 import Update from './update';
 import Payment from './Payment';
+import PasswordChange from './PasswordChange';
 
   const routes = [
     {
@@ -17,6 +18,11 @@ import Payment from './Payment';
       path: "/payment",
       exact: true,
       main: () => <Payment />
+    },
+    {
+        path: "/passwordChange",
+        exact: true,
+        main: () =><PasswordChange />
     }
     
   ];
@@ -69,6 +75,13 @@ const Udashboard = () => {
                             <Link to="/payment" >
                                 <div className="px-2 py-2 ">
                                     Pay Fees
+                                </div>
+                                <hr />
+                            </Link>
+
+                            <Link to="/passwordChange" >
+                                <div className="px-2 py-2 ">
+                                    Change Password
                                 </div>
                                 <hr />
                             </Link>

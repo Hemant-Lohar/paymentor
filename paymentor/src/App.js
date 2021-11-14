@@ -8,7 +8,7 @@ import Adlogin from "./Components/Alogin";
 import { AuthProvider } from "./contexts/AuthContext";
 import Dashboard from "./Components/dashboard";
 import Createpdf from "./Components/Createpdf";
-
+import PasswordChange from "./Components/PasswordChange";
 
 
 function App() {
