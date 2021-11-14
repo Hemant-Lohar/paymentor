@@ -27,7 +27,41 @@ const Login = () => {
     const[newPassword,setnewPassword]=useState("");
     const[info,setinfo]=useState([]);
 
-    // 
+    //     const Oncheck = () =>{
+    //     const ref= firebase.firestore();
+    //     ref.collection("User").doc(newUsername).get()
+    //     .then(snapshot=>
+    //         check_valid(snapshot,newUsername,newPassword)
+    //         )
+    // }
+    
+    // const check_valid = (snapshot,newUsername,newPassword)=>{
+    //     if(newUsername==snapshot.get("URN") && newPassword == snapshot.get("Password") ){
+    //         //alert("Yes...!");
+    //         history.push("/userdashboard");
+    //        //handleSubmit()
+    //     } 
+    //     else{
+    //         alert("No....!");
+    //     }
+    // } 
+
+    // async function handleSubmit(e) {
+    //     e.preventDefault()
+
+    //     try {
+    //     setError("")
+    //     setLoading(true)
+    //     await Oncheck(newUsername,newPassword);
+    //     //await check_valid(newUsername,newPassword) //(emailRef.current.value, passwordRef.current.value)
+    //     //history.push("/userdashboard")
+    //     } catch {
+    //     setError("Failed to log in")
+    //     // alert("Enter Valid Username & Password !")
+    //     }
+
+    //     setLoading(false)
+    // }
     
     async function handleSubmit(e) {
         e.preventDefault()
