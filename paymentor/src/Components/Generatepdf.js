@@ -10,11 +10,11 @@ const Generatepdf = () => {
 
     const [info, setinfo] = useState({
         name: "",
-        receiptid: 0,
+        receiptid: "",
         fee: 0,
-        // class: 0,
-        // dept: "",
-        // category:""
+        Class: "",
+        dept: "",
+        category:""
     })
 
     console.log(namestr.slice(0,-14));
@@ -23,20 +23,12 @@ const Generatepdf = () => {
         
     // }
 
-    useEffect(() => {
+    // useEffect(() => {
   
-            const ref= firebase.firestore();
-            ref.collection("Payment").doc(namestr.slice(0,-14)).get()
-            .then(snapshot=>
-            setinfo({...info, name: snapshot.get("URN"),
-                    receiptid: snapshot.get("orderId"),
-                    // class: snapshot.get("Class"),
-                    // dept: snapshot.get("depertment"),
-                    // category: snapshot.get("Category"),
-                    fee: snapshot.get("Amount")})
         
         
-        )
+        
+    //     )
 
         // setinfo({...info, 
         //     name: currentUser.URN,
@@ -47,17 +39,34 @@ const Generatepdf = () => {
         //     fee: currentUser.Fee,
         // })
         
-    }, [])
+    // }, [])
 
     const generatePdf = () => {
-        
+        const ref= firebase.firestore();
+        ref.collection("Payment").doc(namestr.slice(0,-14)).get()
+        .then(snapshot=>
+        setinfo({...info, name:snapshot.get("Name"),
+                Class: snapshot.get("Class"),
+                dept: snapshot.get("department"),
+                category: snapshot.get("Category"),
+                receiptid: snapshot.get("OrderId"),
+                fee: snapshot.get("Amount")})
+        )
 
+        // ref.collection("User","Payment").doc(namestr.slice(0,-14)).get()
+        // .then(snapshot=>
+        // setinfo({...info, name:snapshot.get("Name"),
+        //         Class: snapshot.get("Class"),
+        //         department: snapshot.get("depertment"),
+        //         category: snapshot.get("Category")})
+        // )
+            
             try {axios.post('/create-pdf', info)
           .then(() => axios.get('fetch-pdf', { responseType: 'blob' }))
           .then((res) => {
             const pdfBlob = new Blob([res.data], { type: 'application/pdf' });
     
-            saveAs(pdfBlob, 'newPdf.pdf');
+            saveAs(pdfBlob, 'FeeReceipt.pdf');
           })
       } catch (error) {
         console.log(error);

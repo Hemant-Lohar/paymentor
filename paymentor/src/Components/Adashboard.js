@@ -77,7 +77,7 @@ const Adashboard = () => {
                     <h4 className="ms-4">Paymentor</h4>
                     
                       {/* {currentUser && currentUser.email} */}<p> 
-                      <button type="button" class="btn btn-outline-primary rounded-pill"
+                      <button type="button" class="btn btn-outline-primary rounded-pill me-4"
                         onClick={
                         () => {
                             history.push('/adminlogin')
