@@ -53,8 +53,7 @@ const Dashboard = () => {
                                     <th className="px-5 py-1 fw-normal bg-light border ">{user.Class}</th>
                                     <th className="px-5 py-1 fw-normal bg-light border ">{user.department}</th>
                                     <th className="px-5 py-1 fw-normal bg-light border ">{user.Category}</th>
-                                    <th className="px-5 py-1 fw-normal bg-light border ">{user.Fee}</th>
-                                    
+                                    <th className="px-5 py-1 fw-normal bg-light border ">{user.Fee}</th>                                  
                                 </tr>
                                 
                             )

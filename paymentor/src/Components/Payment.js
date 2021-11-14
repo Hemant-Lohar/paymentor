@@ -142,6 +142,7 @@ const Payment = () => {
             
                 <div className="container">
                     <div className="d-flex align-items-center justify-content-center">
+                        <img src="/img/pay.svg" alt="payment img" className="w-50 p-5" />
                         <div className="div">
                             <p>Fee Payment</p>
 

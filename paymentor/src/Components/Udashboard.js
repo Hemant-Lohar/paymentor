@@ -6,12 +6,13 @@ import Login from './Login';
 import Add from './Add';
 import Update from './update';
 import Payment from './Payment';
+import Userdetails from './Userdetails';
 
   const routes = [
     {
       path: "/userdetails",
       exact: true,
-      main: () => <h1>Hemant</h1>
+      main: () => <Userdetails /> 
     },
     {
       path: "/payment",
@@ -36,7 +37,7 @@ const Udashboard = () => {
         <>
          <Router>
             <div className="container-fluid">
-                <div className="d-flex justify-content-between my-4">
+                <div className="d-flex justify-content-between py-4">
                     <h4 className="ms-4 ">Paymentor</h4>
                     <button type="button" class="btn btn-outline-primary rounded-pill me-4"
                     onClick={
@@ -45,7 +46,7 @@ const Udashboard = () => {
                         }}>Sign Out</button>
                 </div>
 
-                <div className="row vh-100">
+                <div className="bg-light row vh-100">
                     <div className={toggler ?"box1 vh-100 col-lg-2":"box1 vh-100 col-lg-2 active"}>
 
                     <div className="position-relative close-btn">

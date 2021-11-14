@@ -3,10 +3,21 @@ import axios from "axios"
 import { saveAs } from "file-saver"
 import firebase from "../backend/firebase"
 import { useAuth } from "../contexts/AuthContext"
+import Add from './Add'
+import ReactLoading from 'react-loading';
+
 
 const Generatepdf = () => {
     const { currentUser } = useAuth()
     const namestr = currentUser &&currentUser.email
+
+    const [name, setname] = useState("")
+    const [Class, setClass] = useState("")
+    const [dept, setdept] = useState("")
+    const [fee, setfee] = useState(0)
+    const [category, setcategory] = useState("")
+    const [recept, setrecept] = useState("")
+    const [loading, setloading] = useState()
 
     const [info, setinfo] = useState({
         name: "",
@@ -17,72 +28,96 @@ const Generatepdf = () => {
         category:""
     })
 
-    console.log(namestr.slice(0,-14));
-    console.log(info);
-    // const receipt = () =>{
+    
+    const addData =  () => {
         
-    // }
-
-    // useEffect(() => {
-  
-        
-        
-        
-    //     )
-
-        // setinfo({...info, 
-        //     name: currentUser.URN,
-        //     receiptid: currentUser.Password,
-        //     class: currentUser.Class,
-        //     dept: currentUser.department,
-        //     category: currentUser.Category,
-        //     fee: currentUser.Fee,
-        // })
-        
-    // }, [])
-
-    const generatePdf = () => {
         const ref= firebase.firestore();
-        ref.collection("Payment").doc(namestr.slice(0,-14)).get()
-        .then(snapshot=>
-        setinfo({...info, name:snapshot.get("Name"),
-                Class: snapshot.get("Class"),
-                dept: snapshot.get("department"),
-                category: snapshot.get("Category"),
-                receiptid: snapshot.get("OrderId"),
-                fee: snapshot.get("Amount")})
+        ref.collection("User").doc(namestr.slice(0,-14)).get()
+        .then(snapshot=>{
+        {setname(snapshot.get("Name"))}
+        {setClass(snapshot.get("Class"))}
+        {setdept(snapshot.get("department"))}
+        {setcategory(snapshot.get("Category"))}
+        }
         )
 
-        // ref.collection("User","Payment").doc(namestr.slice(0,-14)).get()
-        // .then(snapshot=>
-        // setinfo({...info, name:snapshot.get("Name"),
-        //         Class: snapshot.get("Class"),
-        //         department: snapshot.get("depertment"),
-        //         category: snapshot.get("Category")})
-        // )
+        ref.collection("Payment").doc(namestr.slice(0,-14)).get()
+        .then(snapshot=>{
+                {setfee(snapshot.get("Amount"))}
+                {setrecept(snapshot.get("OrderId"))}
+                }
+        )
+        
+        setinfo(
+        {...info, 
+                name: name,
+                receiptid: recept,
+                fee: fee,
+                Class: Class,
+                dept: dept,
+                category:category    
+        }
+        )
+        console.log(info);
+
+        const generatePdf = () => {
             
-            try {axios.post('/create-pdf', info)
-          .then(() => axios.get('fetch-pdf', { responseType: 'blob' }))
-          .then((res) => {
-            const pdfBlob = new Blob([res.data], { type: 'application/pdf' });
+                    try {axios.post('/create-pdf', info)
+                .then(() => axios.get('fetch-pdf', { responseType: 'blob' }))
+                .then((res) => {
+                    const  pdfBlob = new Blob([res.data], { type: 'application/pdf' });
+            
+                    saveAs(pdfBlob, 'FeeReceipt.pdf');
+                })
+            } catch (error) {
+                console.log(error);
+                
+            }
     
-            saveAs(pdfBlob, 'FeeReceipt.pdf');
-          })
-      } catch (error) {
-        console.log(error);
+        }
+
+        if (info.name!="") {
+            generatePdf()
+            setloading(false)
+
+        }else {
+            setloading(true)
+        }
         
     }
-    console.log(info);
+       
+
     
-}
+
+//     const generatePdf = () => {
+
+
+        
+//             try { axios.post('/create-pdf', info)
+//           .then(() => axios.get('fetch-pdf', { responseType: 'blob' }))
+//           .then((res) => {
+//              const  pdfBlob = new Blob([res.data], { type: 'application/pdf' });
+    
+//             saveAs(pdfBlob, 'FeeReceipt.pdf');
+//           })
+//       } catch (error) {
+//         console.log(error);
+        
+//     }
+    
+// }
     return (
         <>
             {/* setinfo({...info, name: e.target.value}); */}
                                 
 
             <p><input className="btn btn-primary " type="submit" name="submit" value="Receipt" 
-                onClick={generatePdf} 
+                onClick={addData} 
             /></p>
+
+            <div className="div">
+            { !loading ? "": (<ReactLoading type={'bubbles'} color={"#193044"} height={100} width={150} />)}
+            </div>
             
         </>
     )
