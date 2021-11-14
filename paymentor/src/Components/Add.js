@@ -3,6 +3,7 @@ import React, { useState, useEffect, useRef } from 'react'
 //import { collection, addDoc } from "firebase/firestore"
 import { useAuth } from "../contexts/AuthContext"
 import firebase from '../backend/firebase'
+import CryptoJS from 'crypto-js'
 
 
 
@@ -28,27 +29,13 @@ const Add = () => {
 
     const createUser =  () => {
 
-        // await addDoc(userCollectionRef, { 
-        //     username: newUsername,
-        //     name: newName ,
-        //     password: newPass, 
-        //     class: newClass,
-        //     department: newDept,
-        //     category:newCategory,
-        //     fee: newFee
-        // }).then(function(){
-        //     alert("Data Saved...!")
-        // })
-        // .catch(function (error) {
-        //     alert("Error writing Value: ");
-        //   });
-
+        const ciphertext = CryptoJS.AES.encrypt(JSON.stringify(newPass),'my-secret-key@123').toString();
         const db = firebase.firestore();
         db.collection("User")
             .doc(newUsername)
             .set({
                 URN:newUsername,
-                Password:"user@321",
+                Password:ciphertext,
                 Name:newName,
                 Class:newClass,
                 department:newDept,
@@ -91,8 +78,8 @@ const Add = () => {
             try {
                 setError("")
                 setLoading(true)
-                await signup(emailRef.current.value+"@paymentor.com", "user@321")
-                alert("User added Successfully")
+                // await signup(emailRef.current.value+"@paymentor.com", "user@321")
+                // alert("User added Successfully")
 
             } catch(err){
                 alert("Failed")
