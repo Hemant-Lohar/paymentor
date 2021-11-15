@@ -1,4 +1,4 @@
-module.exports = ({fee, name, Class, department, category, receiptid}) => {
+module.exports = ({fee, name, Class, dept, category, receiptid}) => {
     const today = new Date();
 return `
     <!doctype html>
@@ -87,6 +87,7 @@ return `
        </head>
        <body>
           <div class="invoice-box">
+          <h3 class="justify-center">Fee Receipt</h3>
              <table cellpadding="0" cellspacing="0">
                 <tr class="top">
                    <td colspan="2">
@@ -95,7 +96,8 @@ return `
                             <td class="title"><img  src="http://localhost:8000/logo.svg"
                                style="width:100%; max-width:156px;"></td>
                             <td>
-                               Date : ${`${today.getDate()}. ${today.getMonth() + 1}. ${today.getFullYear()}.`}
+                               Date : ${`${today.getDate()}. ${today.getMonth() + 1}. ${today.getFullYear()}.`}<br/>
+                               Time : ${`${today.toLocaleTimeString()}`}
                             </td>
                          </tr>
                       </table>
@@ -107,7 +109,7 @@ return `
                          <tr>
                             <td>
                                Payer name : ${name}<br/>
-                               Department : ${department}<br/>
+                               Department : ${dept}<br/>
                                Class : ${Class}<br/>
                                Category : ${category}<br/>
                               

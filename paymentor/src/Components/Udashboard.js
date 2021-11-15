@@ -6,6 +6,8 @@ import Login from './Login';
 import Add from './Add';
 import Update from './update';
 import Payment from './Payment';
+import Userdetails from './Userdetails';
+
 import PasswordChange from './PasswordChange';
 import { useLocation } from 'react-router-dom';
 
@@ -13,7 +15,11 @@ import { useLocation } from 'react-router-dom';
     {
       path: "/userdetails",
       exact: true,
+<<<<<<< HEAD
       main: () => <h1>Profile</h1>
+=======
+      main: () => <Userdetails /> 
+>>>>>>> c84e7d770ea5dfa2fbc792119c8a66072a016a2e
     },
     {
       path: "/payment",
@@ -54,7 +60,7 @@ const Udashboard = () => {
         <>
          <Router>
             <div className="container-fluid">
-                <div className="d-flex justify-content-between my-4">
+                <div className="d-flex justify-content-between py-4">
                     <h4 className="ms-4 ">Paymentor</h4>
                     <button type="button" class="btn btn-outline-primary rounded-pill me-4"
                     onClick={
@@ -63,7 +69,7 @@ const Udashboard = () => {
                         }}>Sign Out</button>
                 </div>
 
-                <div className="row vh-100">
+                <div className="bg-light row vh-100">
                     <div className={toggler ?"box1 vh-100 col-lg-2":"box1 vh-100 col-lg-2 active"}>
 
                     <div className="position-relative close-btn">
