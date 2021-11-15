@@ -12,7 +12,7 @@ import PasswordChange from './PasswordChange';
 
   const routes = [
     {
-      path: "/userdetails",
+      path: "/userdashboard",
       exact: true,
       main: () => <Userdetails /> 
     },
@@ -67,7 +67,7 @@ const Udashboard = () => {
                     </div>
    
                     {toggler ?<div className="slidebar d-flex flex-column mt-5">
-                            <Link to="/userdetails" >
+                            <Link to="/userdashboard" >
                                 <div className="px-2 py-2 ">
                                     Dashboard
                                 </div>

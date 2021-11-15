@@ -31,12 +31,15 @@ const Userdetails = () => {
 
     return (
         <>
-           <div className="bg-light vh-100 container-fluid d-flex justify-content-start ms-4 mt-4 align-items-start flex-wrap">
-           <div className="d-flex justify-content-evenly align-items-center flex-wrap">
-           <img src="/img/profile.svg" alt="Profile img" className="w-50" />
+           <div className="bg-light vh-100 container-fluid d-flex justify-content-start ms-4 mt-5 align-items-start flex-wrap">
+           <div className="d-flex justify-content-center align-items-center flex-wrap">
+           <img src="/img/profile.svg" alt="Profile img" className="w-50 mx-2" />
 
-               <div className="justify-self-start">
-                   <table className="fw-normal">
+               <div className="">
+                   <div className="div">
+                       <img src="/img/user.png" alt="profile img" className="w-25 mt-5 mb-4 ms-5" />
+                    </div>
+                   <table className="fw-normal ms-5">
                        <tr>
                            <th>Name </th>
                            <th className="fw-normal ps-2"> : {info.name}</th>

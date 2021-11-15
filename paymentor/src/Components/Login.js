@@ -47,7 +47,8 @@ const Login = () => {
            //handleSubmit()
         } 
         else{
-            alert("No....!");
+            alert("Failed to Login!");
+            setError("Failed to log in")
         }
     } 
 

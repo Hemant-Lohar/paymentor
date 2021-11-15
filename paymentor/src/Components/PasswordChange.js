@@ -8,10 +8,10 @@ import CryptoJS from 'crypto-js'
 
 const PasswordChange = () => {
 
-    const[newURN,setnewURN]=React.useState("");
-    const[oldpass,setoldpass]=React.useState("");
+    const[newURN,setnewURN]=useState("");
+    const[oldpass,setoldpass]=useState("");
     const[newPassword,setnewPassword]=React.useState("");
-    const[conpass,setconpass]=React.useState("");
+    const[conpass,setconpass]=useState("");
     const[info,setinfo]=useState([]);
 
     const [error, setError] = useState("")
@@ -91,22 +91,23 @@ const PasswordChange = () => {
     return(
 
         <>
-        <div className="container-fluid d-flex justify-content-evenly align-items-center flex-wrap mt-5">
-           
+        <div className="container-fluid d-flex justify-content-center align-items-center flex-wrap mt-5">
+        <img src="/img/password.svg" alt="Profile img" className="w-50 p-5" />
+
                 <div className="bg-light vh d-flex flex-column justify-content-center align-items-center mt-4">
                 {/* {currentUser && currentUser.email} */}
                             <h6 className="text-danger">Change Password</h6>
 
                 <form onSubmit={handleSubmit} className="d-flex justify-content-center align-items-start flex-wrap pb-5">
                     <div className="mx-5">
-                    <div className="div">
-                    <p><label for="username">URN</label></p>
-                    <p><input type="text" name="username" id="username" value={newURN}
-                    onChange={(e) => {
-                      setnewURN(e.target.value);
-                    }}
-                    /></p>
-                </div>
+                        <div className="div">
+                            <p><label for="username">URN</label></p>
+                            <p><input type="text" name="username" id="username" value={newURN}
+                            onChange={(e) => {
+                            setnewURN(e.target.value);
+                            }}
+                            /></p>
+                        </div>
                        <div className="div">
  
                             <p><label for="username">Old Password</label></p>
@@ -133,17 +134,17 @@ const PasswordChange = () => {
                                 }}
                                 /></p>
                         </div>
-                       
-                    </div>
-                    <div className="">                         
-                        <div className="d-flex flex-column justify-content-center align-items-start">
-                            <input className="btn btn-primary align-self-end" name="submit" value="Submit"
+                        <div className="div">                         
+                        {/* <div className="d-flex flex-column justify-content-center align-items-start"> */}
+                            <p><input className="btn btn-primary align-self-end" name="submit" value="Submit"
                            onClick={()=>passupdate(newURN, oldpass)} 
                           //disabled={Loading}
-                            />
+                            /></p>
                              {/* <button onClick={()=>passupdate(newURN, oldpass)} >Change Password</button> <br/><br/> */}
+                        {/* </div> */}
                         </div>
-                        </div>
+                    </div>
+                    
                     </form>
                 </div>
                 
