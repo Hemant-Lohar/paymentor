@@ -13,13 +13,9 @@ import { useLocation } from 'react-router-dom';
 
   const routes = [
     {
-      path: "/userdetails",
+      path: "/userdashboard",
       exact: true,
-<<<<<<< HEAD
-      main: () => <h1>Profile</h1>
-=======
       main: () => <Userdetails /> 
->>>>>>> c84e7d770ea5dfa2fbc792119c8a66072a016a2e
     },
     {
       path: "/payment",
@@ -83,7 +79,7 @@ const Udashboard = () => {
                     </div>
    
                     {toggler ?<div className="slidebar d-flex flex-column mt-5">
-                            <Link to="/userdetails" >
+                            <Link to="/userdashboard" >
                                 <div className="px-2 py-2 ">
                                     Dashboard
                                 </div>

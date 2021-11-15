@@ -3,23 +3,18 @@ import axios from "axios"
 import { saveAs } from "file-saver"
 import firebase from "../backend/firebase"
 import { useAuth } from "../contexts/AuthContext"
-<<<<<<< HEAD
 import { useCookies } from 'react-cookie'
-=======
 import Add from './Add'
 import ReactLoading from 'react-loading';
 
->>>>>>> c84e7d770ea5dfa2fbc792119c8a66072a016a2e
 
 const Generatepdf = () => {
     const { currentUser } = useAuth()
     const namestr = currentUser &&currentUser.email
 
-<<<<<<< HEAD
     const [newName, setnewName] = React.useState("");
     const [cookies, setCookie] = useCookies(['user']);
       setCookie(cookies.get("Name"))
-=======
     const [name, setname] = useState("")
     const [Class, setClass] = useState("")
     const [dept, setdept] = useState("")
@@ -27,7 +22,6 @@ const Generatepdf = () => {
     const [category, setcategory] = useState("")
     const [recept, setrecept] = useState("")
     const [loading, setloading] = useState()
->>>>>>> c84e7d770ea5dfa2fbc792119c8a66072a016a2e
 
     const [info, setinfo] = useState({
         name: "",
@@ -42,7 +36,6 @@ const Generatepdf = () => {
     const addData =  () => {
         
         const ref= firebase.firestore();
-<<<<<<< HEAD
         ref.collection("Payment").doc().get()
         .then(snapshot=>
         setinfo({...info, name:snapshot.get("Name"),
@@ -51,7 +44,6 @@ const Generatepdf = () => {
                 category: snapshot.get("Category"),
                 receiptid: snapshot.get("OrderId"),
                 fee: snapshot.get("Amount")})
-=======
         ref.collection("User").doc(namestr.slice(0,-14)).get()
         .then(snapshot=>{
         {setname(snapshot.get("Name"))}
@@ -77,7 +69,6 @@ const Generatepdf = () => {
                 dept: dept,
                 category:category    
         }
->>>>>>> c84e7d770ea5dfa2fbc792119c8a66072a016a2e
         )
         console.log(info);
 
