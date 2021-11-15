@@ -34,30 +34,48 @@ const Login = () => {
 
 
         const Oncheck = () =>{
-        const ref= firebase.firestore();
-        ref.collection("User").doc(newUsername).get()
-        .then(snapshot=>
-            check_valid(snapshot,newUsername,newPassword)
-            )
+
+            if(newUsername == "" || newPassword == ""){
+                alert("Enter information first...!")
+            }
+            else{
+                const ref= firebase.firestore();
+                ref.collection("User").doc(newUsername).get()
+                .then(snapshot=>
+                    check_valid(snapshot,newUsername,newPassword)
+                    )
+            }
+             
     }
     
     const check_valid = (snapshot,newUsername,newPassword)=>{
+        
+        // const decryptedData = "";
+        
 
-        const bytes = CryptoJS.AES.decrypt(snapshot.get("Password"),'my-secret-key@123');
-        const decryptedData = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
+        if(newUsername != snapshot.get("URN") ){
+            alert("invalide Username....!")
+ 
+        }
+        else 
+        {   
+            const bytes = CryptoJS.AES.decrypt(snapshot.get("Password"),'my-secret-key@123');
+            const decryptedData = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
 
-        if(newUsername==snapshot.get("URN") && newPassword == decryptedData ){
+            if(newUsername==snapshot.get("URN") && newPassword == decryptedData ){
             // setCookie('Name', newUsername, { path: '/' });
             // setCookie('Password', newPassword , { path: '/' });
             //alert("Yes...!");
             localStorage.setItem('username', newUsername)
             history.push("/userdashboard",{state:{newUsername}});
            //handleSubmit()
-        } 
-        else{
-            alert("Failed to Login!");
-            setError("Failed to log in")
+        }else{
+            alert("Failed to login");
+            setError("Failed to login");
+            
         }
+    } 
+        
     } 
 
     // async function handleSubmit(e) {
