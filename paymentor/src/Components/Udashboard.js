@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import '../index.css';
 import {BrowserRouter as Router, Route, Switch, Link} from "react-router-dom"
 import {useHistory} from "react-router-dom"
@@ -7,16 +7,18 @@ import Add from './Add';
 import Update from './update';
 import Payment from './Payment';
 import PasswordChange from './PasswordChange';
+import { useLocation } from 'react-router-dom';
 
   const routes = [
     {
       path: "/userdetails",
       exact: true,
-      main: () => <h1>Hemant</h1>
+      main: () => <h1>Profile</h1>
     },
     {
       path: "/payment",
       exact: true,
+      
       main: () => <Payment />
     },
     {
@@ -30,6 +32,7 @@ import PasswordChange from './PasswordChange';
 const Udashboard = () => {
     const width=800;
     let history = useHistory();
+    let location = useLocation();
     const [toggler, settoggler] = useState(false)
 
     const toggle = () => settoggler(!toggler)
@@ -38,6 +41,15 @@ const Udashboard = () => {
             settoggler(!toggler)
         }
     }
+
+     
+    const abc = location.state;
+    console.log(abc);
+    // history.push({
+    //     path:"/payment",
+    //     state:{abc}
+    // });
+
     return (
         <>
          <Router>
@@ -72,7 +84,7 @@ const Udashboard = () => {
                                 <hr />
                             </Link>
                             
-                            <Link to="/payment" >
+                            <Link to="/payment" state={abc}>
                                 <div className="px-2 py-2 ">
                                     Pay Fees
                                 </div>
@@ -98,7 +110,7 @@ const Udashboard = () => {
                                     key={index}
                                     path={route.path}
                                     exact={route.exact}
-                                    children={<Route exact path={route.path} component={route.main}/>
+                                    children={<Route exact path={route.path} component={route.main}   />
                             }
                                 />
                             ))}

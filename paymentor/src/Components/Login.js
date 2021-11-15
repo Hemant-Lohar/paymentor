@@ -4,6 +4,9 @@ import { Link, useHistory } from "react-router-dom"
 import { useAuth } from "../contexts/AuthContext"
 import firebase from "../backend/firebase"
 import CryptoJS from "crypto-js";
+import { useCookies } from 'react-cookie';
+
+import { useLocation } from "react-router";
 
 // import {BrowserRouter as Router, Route, Switch} from "react-router-dom"
 // import { useForm } from "react-hook-form";
@@ -27,6 +30,8 @@ const Login = () => {
     const[newUsername,setnewUsername]=useState("");
     const[newPassword,setnewPassword]=useState("");
     const[info,setinfo]=useState([]);
+    const [cookies, setCookie] = useCookies(['user']);
+
 
         const Oncheck = () =>{
         const ref= firebase.firestore();
@@ -42,8 +47,10 @@ const Login = () => {
         const decryptedData = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
 
         if(newUsername==snapshot.get("URN") && newPassword == decryptedData ){
+            setCookie('Name', newUsername, { path: '/' });
+            setCookie('Password', newPassword , { path: '/' });
             //alert("Yes...!");
-            history.push("/userdashboard");
+            history.push("/userdashboard",{state:{newUsername}});
            //handleSubmit()
         } 
         else{
@@ -200,7 +207,7 @@ window.addEventListener("load", async (event) => {
                         
     return (
         <>
-           {/* <div className="main vh-100" style={{backgroundImage:"url(./images/Background1.svg)"}}> */}
+          
                
                <div className="bgcolor row vh-100">
                 
@@ -268,6 +275,17 @@ window.addEventListener("load", async (event) => {
 
                             </div>
                     </div> */}
+
+                    {cookies.newUsername && (
+                        <div>
+                            Name: <p>{cookies.newUsername}</p>
+                        </div>
+                        )}
+                        {cookies.newPassword && (
+                        <div>
+                            Password: <p>{cookies.newPassword}</p>
+                        </div>
+                        )}
 
                 </div>
                     

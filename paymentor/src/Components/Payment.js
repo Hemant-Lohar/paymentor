@@ -3,6 +3,7 @@ import React, { useRef, useState } from "react"
  import Generatepdf from "./Generatepdf"
  import { useAuth } from "../contexts/AuthContext"
 import firebase from '../backend/firebase'
+import { useLocation , useHistory } from "react-router-dom"
 
 //  import { db } from '../backend/firebase'
 //  import { collection, getDocs,doc, getDoc } from "firebase/firestore"
@@ -36,6 +37,13 @@ const Payment = () => {
 
     const currDate = new Date().toLocaleDateString()
     const currTime = new Date().toLocaleTimeString()
+
+    let location = useLocation();
+    let history = useHistory();
+
+    const userUrn = location.state;
+    console.log(userUrn);
+
 
     const { currentUser } = useAuth()
     const namestr = currentUser &&currentUser.email

@@ -3,10 +3,15 @@ import axios from "axios"
 import { saveAs } from "file-saver"
 import firebase from "../backend/firebase"
 import { useAuth } from "../contexts/AuthContext"
+import { useCookies } from 'react-cookie'
 
 const Generatepdf = () => {
     const { currentUser } = useAuth()
     const namestr = currentUser &&currentUser.email
+
+    const [newName, setnewName] = React.useState("");
+    const [cookies, setCookie] = useCookies(['user']);
+      setCookie(cookies.get("Name"))
 
     const [info, setinfo] = useState({
         name: "",
@@ -43,7 +48,7 @@ const Generatepdf = () => {
 
     const generatePdf = () => {
         const ref= firebase.firestore();
-        ref.collection("Payment").doc(namestr.slice(0,-14)).get()
+        ref.collection("Payment").doc().get()
         .then(snapshot=>
         setinfo({...info, name:snapshot.get("Name"),
                 Class: snapshot.get("Class"),

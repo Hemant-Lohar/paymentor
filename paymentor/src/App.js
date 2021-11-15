@@ -11,6 +11,7 @@ import Createpdf from "./Components/Createpdf";
 import PasswordChange from "./Components/PasswordChange";
 
 
+
 function App() {
   return (
     <>
@@ -20,7 +21,8 @@ function App() {
           <Route exact path="/" component={Login}/>
           {/* <Route exact path="/" component={Adlogin}/> */}
           <Route exact path="/adminlogin" component={Adminlogin}/>
-          <Route exact path="/userdashboard" component={Udashboard}/>
+         {/* <Route exact path="/userdashboard" component={Udashboard }/> */}
+          <Route exact path="/userdashboard"  component={() => <Udashboard  />}/>
           <Route exact path="/admindashboard" component={Adashboard}/>
           <Route exact path="/pdf" component={Createpdf}/>
         </Switch>
