@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react"
+import React, { useRef, useState, useEffect } from "react"
  import axios from "axios"
  import Generatepdf from "./Generatepdf"
  import { useAuth } from "../contexts/AuthContext"
@@ -7,6 +7,8 @@ import { useLocation , useHistory } from "react-router-dom"
 
 //  import { db } from '../backend/firebase'
 //  import { collection, getDocs,doc, getDoc } from "firebase/firestore"
+
+
  
  function loadScript(src) {
 
@@ -34,6 +36,7 @@ const Payment = () => {
     const [feeamount, setfeeamount] = useState()
     const [orderId, setorderId] = useState("")
     const [paymentId, setpaymentId] = useState("")
+    const [totalFee, settotalFee] = useState(0)
 
     const currDate = new Date().toLocaleDateString()
     const currTime = new Date().toLocaleTimeString()
@@ -59,6 +62,16 @@ const Payment = () => {
     // console.log('Document data:', doc.data());
     // }
 
+    useEffect(() => {
+        const ref= firebase.firestore();
+        ref.collection("User").doc(localStorage.getItem("username")).get()
+        .then(snapshot=>{
+            
+            settotalFee(snapshot.get("Fee"))
+            }  
+        
+        ) 
+    }, [])
     
     async function dispalyRazorpay () {
 
@@ -102,14 +115,27 @@ const Payment = () => {
 
                 const db = firebase.firestore();
                 db.collection("Payment")
-                .doc(namestr.slice(0,-14))
+                .doc(localStorage.getItem("username"))
                 .set({
-                URN:namestr.slice(0,-14),
+                URN:localStorage.getItem("username"),
                 Amount:amount,
                 Date:currDate,
                 OrderId:response.razorpay_order_id,
                 PaymentId:response.razorpay_payment_id,
                 Time:currTime
+                })
+                .then(function(){
+                    alert("Data Saved...!")
+                })
+                .catch(function (error) {
+                    console.error("Error writing Value: ", error);
+                });
+
+                // const db = firebase.firestore();
+            db.collection("User")
+                .doc(localStorage.getItem("username"))
+                .update({
+                    Dues: (totalFee-amount)
                 })
                 .then(function(){
                     alert("Data Saved...!")

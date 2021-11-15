@@ -47,9 +47,10 @@ const Login = () => {
         const decryptedData = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
 
         if(newUsername==snapshot.get("URN") && newPassword == decryptedData ){
-            setCookie('Name', newUsername, { path: '/' });
-            setCookie('Password', newPassword , { path: '/' });
+            // setCookie('Name', newUsername, { path: '/' });
+            // setCookie('Password', newPassword , { path: '/' });
             //alert("Yes...!");
+            localStorage.setItem('username', newUsername)
             history.push("/userdashboard",{state:{newUsername}});
            //handleSubmit()
         } 

@@ -6,6 +6,7 @@ import Login from './Login';
 import Add from './Add';
 import Dashboard from './dashboard';
 import Update from './update';
+import Pdashboard from './Pdashboard';
 import { useAuth } from "../contexts/AuthContext"
 import Delete from './delete';
 
@@ -52,6 +53,11 @@ import Delete from './delete';
       path: "/admindashboard/delete",
       exact: true,
       main: () => <Delete />
+    },
+    {
+      path: "/admindashboard/paymentdetails",
+      exact: true,
+      main: () => <Pdashboard />
     }
   ];
 
@@ -102,6 +108,12 @@ const Adashboard = () => {
                             <Link to="/admindashboard" >
                                 <div className="px-2 py-2 ">
                                     Dashboard
+                                </div>
+                                <hr />
+                            </Link>
+                            <Link to="/admindashboard/paymentdetails" >
+                                <div className="px-2 py-2 ">
+                                    Payment Details
                                 </div>
                                 <hr />
                             </Link>

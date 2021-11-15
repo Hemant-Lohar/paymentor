@@ -23,6 +23,7 @@ const Add = () => {
     const [newDept, setnewDept] = React.useState("");
     const [newCategory, setnewCategory] = React.useState("");
     const [newFee, setnewFee] = React.useState("");
+    const [newDues, setnewDues] = React.useState("");
     const { signup } = useAuth()
 
 
@@ -40,7 +41,8 @@ const Add = () => {
                 Class:newClass,
                 department:newDept,
                 Category:newCategory,
-                Fee:newFee
+                Fee:newFee,
+                Dues:newFee
             })
             .then(function(){
                 alert("Data Saved...!")

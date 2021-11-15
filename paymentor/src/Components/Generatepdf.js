@@ -5,6 +5,7 @@ import firebase from "../backend/firebase"
 import { useAuth } from "../contexts/AuthContext"
 import Add from './Add'
 import ReactLoading from 'react-loading';
+import { useCookies } from 'react-cookie';
 
 
 const Generatepdf = () => {
@@ -18,6 +19,7 @@ const Generatepdf = () => {
     const [category, setcategory] = useState("")
     const [recept, setrecept] = useState("")
     const [loading, setloading] = useState()
+    const [cookies, setCookie] = useCookies(['user']);
 
     const [info, setinfo] = useState({
         name: "",
@@ -32,7 +34,7 @@ const Generatepdf = () => {
     const addData =  () => {
         
         const ref= firebase.firestore();
-        ref.collection("User").doc(namestr.slice(0,-14)).get()
+        ref.collection("User").doc(localStorage.getItem("username")).get()
         .then(snapshot=>{
         {setname(snapshot.get("Name"))}
         {setClass(snapshot.get("Class"))}
@@ -41,7 +43,7 @@ const Generatepdf = () => {
         }
         )
 
-        ref.collection("Payment").doc(namestr.slice(0,-14)).get()
+        ref.collection("Payment").doc(localStorage.getItem("username")).get()
         .then(snapshot=>{
                 {setfee(snapshot.get("Amount"))}
                 {setrecept(snapshot.get("OrderId"))}

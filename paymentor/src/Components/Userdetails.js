@@ -9,19 +9,21 @@ const Userdetails = () => {
         fee: 0,
         Class: "",
         dept: "",
-        category:""
+        category:"",
+        dues: 0
     })
 
 
     useEffect(() => {
         const ref= firebase.firestore();
-        ref.collection("User").doc("19131087").get()
+        ref.collection("User").doc(localStorage.getItem("username")).get()
         .then(snapshot=>{setinfo({...info, 
             name: snapshot.get("Name"),
             Class: snapshot.get("Class"),
             dept: snapshot.get("department"),
             category: snapshot.get("Category"),
-            fee: snapshot.get("Fee")
+            fee: snapshot.get("Fee"),
+            dues: snapshot.get("Dues")
             })  
         }
         ) 
@@ -59,6 +61,10 @@ const Userdetails = () => {
                        <tr>
                            <th>Total Fee </th>
                            <th className="fw-normal ps-2"> : {info.fee}</th>
+                       </tr>
+                       <tr>
+                           <th>Dues Fee </th>
+                           <th className="fw-normal ps-2"> : {info.dues}</th>
                        </tr>
                    </table>
                </div>
