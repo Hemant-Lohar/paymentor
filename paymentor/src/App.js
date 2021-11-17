@@ -19,9 +19,7 @@ function App() {
       <Router>
         <Switch>
           <Route exact path="/" component={Login}/>
-          {/* <Route exact path="/" component={Adlogin}/> */}
           <Route exact path="/adminlogin" component={Adminlogin}/>
-         {/* <Route exact path="/userdashboard" component={Udashboard }/> */}
           <Route exact path="/userdashboard"  component={() => <Udashboard  />}/>
           <Route exact path="/admindashboard" component={Adashboard}/>
           <Route exact path="/pdf" component={Createpdf}/>

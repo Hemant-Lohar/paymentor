@@ -46,7 +46,7 @@ const Generatepdf = () => {
         ref.collection("Payment").doc(localStorage.getItem("username")).get()
         .then(snapshot=>{
                 {setfee(snapshot.get("Amount"))}
-                {setrecept(snapshot.get("OrderId"))}
+                {setrecept(snapshot.get("PaymentId"))}
                 }
         )
         
@@ -90,27 +90,9 @@ const Generatepdf = () => {
        
 
     
-
-//     const generatePdf = () => {
-
-
-        
-//             try { axios.post('/create-pdf', info)
-//           .then(() => axios.get('fetch-pdf', { responseType: 'blob' }))
-//           .then((res) => {
-//              const  pdfBlob = new Blob([res.data], { type: 'application/pdf' });
-    
-//             saveAs(pdfBlob, 'FeeReceipt.pdf');
-//           })
-//       } catch (error) {
-//         console.log(error);
-        
-//     }
-    
-// }
     return (
         <>
-            {/* setinfo({...info, name: e.target.value}); */}
+           
                                 
 
             <p><input className="btn btn-primary " type="submit" name="submit" value="Receipt" 

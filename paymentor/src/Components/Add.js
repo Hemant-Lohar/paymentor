@@ -9,7 +9,7 @@ import CryptoJS from 'crypto-js'
 
 const Add = () => {
 
-  //  const userCollectionRef = collection(db ,"User");
+
 
     const emailRef = useRef()
     const passwordRef = useRef()
@@ -51,28 +51,7 @@ const Add = () => {
                 console.error("Error writing Value: ", error);
             });
     }
-
-
-
-    // const createuser = () => {
-    //     const [currentUser, setCurrentUser] = useState(null);    
-    //     const handleSubmit = (e) => {
-    //       e.preventDefault();    
-    //       const { username, password } = e.target.elements;
-    //       try {
-    //         firebaseConfig.auth().createUserWithEmailAndPassword(username.value, password.value);      
-    //         setCurrentUser(true);
-    //       } catch (error) {
-    //         alert(error);
-    //       }
-    //     };
-
-    //     if (currentUser) {
-    //         alert(" Added Successfully");
-    //     }
-    // }
-
-        
+       
 
         async function handleSubmit(e) {
         e.preventDefault()
@@ -80,8 +59,7 @@ const Add = () => {
             try {
                 setError("")
                 setLoading(true)
-                // await signup(emailRef.current.value+"@paymentor.com", "user@321")
-                // alert("User added Successfully")
+                
 
             } catch(err){
                 alert("Failed")

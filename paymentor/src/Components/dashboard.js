@@ -22,6 +22,8 @@ const Dashboard = () => {
     return (
         <>
            <div className="bg-light vh-100 container-fluid">
+           <h4 className="text-center my-4"> Student Details</h4>
+
                 
                     <div className="overflow-scroll">
 
@@ -36,13 +38,7 @@ const Dashboard = () => {
                             <th className="px-5 py-1 fw-normal bg-light border text-primary">Fee</th>
                         </tr>
                         
-                    
-
-                        {/* <p>UserName: {user.username}</p>
-                        <p>Password: {user.password}</p>
-                        <p>Class: {user.class}</p>
-                        <p>Department: {user.department}</p>
-                        <p>Category: {user.category}</p> */}
+                
                
                         { users.map((user) => {
                             return (

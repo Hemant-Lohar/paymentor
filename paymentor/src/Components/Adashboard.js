@@ -11,28 +11,7 @@ import { useAuth } from "../contexts/AuthContext"
 import Delete from './delete';
 
 
-//   const routes = [
-//     {
-//       path: "/dashboard",
-//       exact: true,
-//       main: () => <Dashboard />
-//     },
-//     {
-//       path: "/add",
-//       exact: true,
-//       main: () => <Add />
-//     },
-//     {
-//       path: "/update",
-//       exact: true,
-//       main: () => <Update />
-//     },
-//     {
-//       path: "/delete",
-//       exact: true,
-//       main: () => <h2>delete</h2>
-//     }
-//   ];
+
   const routes = [
     {
       path: "/admindashboard",
@@ -82,12 +61,13 @@ const Adashboard = () => {
                 <div className="d-flex justify-content-between mt-4">
                     <h4 className="ms-4">Paymentor</h4>
                     
-                      {/* {currentUser && currentUser.email} */}<p> 
-                      <button type="button" class="btn btn-outline-primary rounded-pill me-4"
+                 <p> {currentUser && currentUser.email}
+                      <button type="button" class="btn btn-outline-primary rounded-pill  mx-2"
                         onClick={
                         () => {
                             history.push('/adminlogin')
-                        } }>Sign Out</button></p>  
+                        } }>Sign Out</button>
+                        </p>  
                 </div>
                 
 
@@ -143,8 +123,7 @@ const Adashboard = () => {
                         <div className="d-flex justify-content-end">
   
                         </div>
-                        {/* <Route exact path="/admindashboard" component={Dashboard} />
-                        <Route  path="/admindashboard/add" component={Add} /> */}
+                        
                         <Switch>
                             {routes.map((route, index) => (
                             

@@ -4,25 +4,15 @@ import { Link, useHistory } from "react-router-dom"
 import { useAuth } from "../contexts/AuthContext"
 import firebase from "../backend/firebase"
 import CryptoJS from "crypto-js";
-import { useCookies } from 'react-cookie';
 
-import { useLocation } from "react-router";
 
-// import {BrowserRouter as Router, Route, Switch} from "react-router-dom"
-// import { useForm } from "react-hook-form";
-// import { yupResolver } from "@hookform/resolvers/yup";
-// import * as yup from "yup";
 
-// const schema = yup.object().shape({
-//     username: yup.string().required(),
-//     password: yup.string().min(4).max(8).required()
-// })
 
 const Login = () => {
 
     const emailRef = useRef()
     const passwordRef = useRef()
-    const { login } = useAuth()
+    
     const [error, setError] = useState("")
     const [loading, setLoading] = useState(false)
     const history = useHistory()
@@ -30,13 +20,13 @@ const Login = () => {
     const[newUsername,setnewUsername]=useState("");
     const[newPassword,setnewPassword]=useState("");
     const[info,setinfo]=useState([]);
-    const [cookies, setCookie] = useCookies(['user']);
+    
 
 
         const Oncheck = () =>{
 
             if(newUsername == "" || newPassword == ""){
-                alert("Enter information first...!")
+                alert("Enter Username and Password !");
             }
             else{
                 const ref= firebase.firestore();
@@ -50,11 +40,11 @@ const Login = () => {
     
     const check_valid = (snapshot,newUsername,newPassword)=>{
         
-        // const decryptedData = "";
+        
         
 
         if(newUsername != snapshot.get("URN") ){
-            alert("invalide Username....!")
+            alert("Enter valid Username and Password !")
  
         }
         else 
@@ -63,14 +53,10 @@ const Login = () => {
             const decryptedData = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
 
             if(newUsername==snapshot.get("URN") && newPassword == decryptedData ){
-            // setCookie('Name', newUsername, { path: '/' });
-            // setCookie('Password', newPassword , { path: '/' });
-            //alert("Yes...!");
             localStorage.setItem('username', newUsername)
             history.push("/userdashboard",{state:{newUsername}});
-           //handleSubmit()
         }else{
-            alert("Failed to login");
+           
             setError("Failed to login");
             
         }
@@ -78,22 +64,6 @@ const Login = () => {
         
     } 
 
-    // async function handleSubmit(e) {
-    //     e.preventDefault()
-
-    //     try {
-    //     setError("")
-    //     setLoading(true)
-    //     await Oncheck(newUsername,newPassword);
-    //     //await check_valid(newUsername,newPassword) //(emailRef.current.value, passwordRef.current.value)
-    //     //history.push("/userdashboard")
-    //     } catch {
-    //     setError("Failed to log in")
-    //     // alert("Enter Valid Username & Password !")
-    //     }
-
-    //     setLoading(false)
-    // }
     
     async function handleSubmit(e) {
         e.preventDefault()
@@ -112,97 +82,6 @@ const Login = () => {
     }
 
 
-
-//     const userRef = useRef()
-//     const passwordRef = useRef()
-//     // const { login } = useAuth()
-//     const [error, setError] = useState("")
-//     const [loading, setLoading] = useState(false)
-//     const history = useHistory()
-
-//     const [users, setUsers] = useState([]);
-//     const userCollectionRef = collection(db ,"User");
-
-//     const [currentUsername, setcurrentUsername] = useState()
-//     const [currentUserpass, setcurrentUserpass] = useState()
-//     const [inputUsername, setinputUsername] = useState()
-//     const [inputUserpass, setinputUserpass] = useState()
-
-//     useEffect(() => {
-    
-//     const getUsers = async () => {
-//         const data = await getDocs(userCollectionRef)
-//         setUsers(data.docs.map((doc) => ({...doc.data(), id: doc.username})))
-//         }
-
-//         getUsers()
-//     }, [])
-//     // emailRef.current.value, passwordRef.current.value
-    
-//     const loginuser = () => {
-//         setcurrentUsername( users.find((user) => {
-//             return ( user.username  === inputUsername) 
-//         }))
-
-//         setcurrentUserpass( users.find((user) => {
-//             return (user.password === inputUserpass) 
-//         })
-//         )
-
-//         try {if (currentUsername.username == inputUsername) {
-//             history.push("/userdashboard")
-//         } else {
-//             alert("Input Correct Details")
-//         }} catch(err) {
-//             console.log(err);
-//         }
-//         console.log(currentUsername);
-//         console.log(inputUsername);
-        
-
-//     }
-
-//     // async function handleSubmit(e) {
-//     //     e.preventDefault()
-
-//     //     try {
-//     //     setError("")
-//     //     setLoading(true)
-//     //     await loginuser(inputUsername, inputUserpass)
-//     //     history.push("/userdashboard")
-//     //     } catch {
-//     //     alert("Failed to log in")
-//     //     // alert("Enter Valid Username & Password !")
-//     //     }
-
-//     //     setLoading(false)
-//     // }
-    
-
-
-//     // async function handleSubmit(e) {
-//     //     e.preventDefault()
-
-//     //     try {
-//     //     setError("")
-//     //     setLoading(true)
-//     //     await login(userRef.current.value, passwordRef.current.value)
-//     //     history.push("/")
-//     //     } catch {
-//     //     setError("Failed to log in")
-//     //     }
-
-//     //     setLoading(false)
-//     // }
-
-
-// //     const { register, handleSubmit, errors } = useForm({
-// //     resolver: yupResolver(schema),
-// //   });
-
-// //     const onSubmit = (data) => {
-// //         console.log(data);
-// //     };
 const checkOnlineStatus = async () => {
     try {
       const online = await fetch("/1pixel.png");
@@ -211,11 +90,7 @@ const checkOnlineStatus = async () => {
       return false; // definitely offline
     }
   };
-//   setInterval(async () => {
-//   const result = await checkOnlineStatus();
-//   const statusDisplay = document.getElementById("status");
-//   statusDisplay.textContent = result ? "Online" : "OFFline";
-// }, 3000); // probably too often, try 30000 for every 30 seconds
+
 window.addEventListener("load", async (event) => {
     const status = ""
       status = (await checkOnlineStatus())
@@ -296,16 +171,7 @@ window.addEventListener("load", async (event) => {
                             </div>
                     </div> */}
 
-                    {cookies.newUsername && (
-                        <div>
-                            Name: <p>{cookies.newUsername}</p>
-                        </div>
-                        )}
-                        {cookies.newPassword && (
-                        <div>
-                            Password: <p>{cookies.newPassword}</p>
-                        </div>
-                        )}
+                   
 
                 </div>
                     

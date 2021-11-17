@@ -126,7 +126,7 @@ return `
                    <td>Amount</td>
                 </tr>
                 <tr class="item">
-                   <td>Exam Fee :</td>
+                   <td>College Fee :</td>
                    <td>${fee} Rs.</td>
                 </tr>
              </table>

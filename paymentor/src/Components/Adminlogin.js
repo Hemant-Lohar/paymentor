@@ -74,28 +74,6 @@ const Adminlogin = () => {
 
                     </div>
                    
-                    
-                    {/* <div className="container-lg flex-column d-flex align-items-center justify-content-center bg-white shadow br part2">
-                       
-
-                            <div className="align-items-end w-50">
-                            <h5 className="fw-bold mb-3 fs-3 align-self-start">Log in</h5>
-                                <form className="d-flex flex-column align-items-center" action="#" method="post">
-                                <div class="form-floating mb-3">
-                                    <input type="text" class="form-control" name="username" id="username" placeholder="username" />
-                                    <label for="username">Username</label>
-                                </div>
-                                <div class="form-floating mb-5">
-                                    <input type="password" class="form-control" name="password" id="password" placeholder="password"/>
-                                    <label for="password">Password</label>
-
-                                </div>
-                                <input className="btn btn-primary px-4 py-2" type="button" value="Adminlogin" />
-                                </form>
-                                
-
-                            </div>
-                    </div> */}
 
                 </div>
                     

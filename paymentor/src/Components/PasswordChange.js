@@ -75,9 +75,7 @@ const PasswordChange = () => {
             try {
                 setError("")
                 setLoading(true)
-                // await signup(emailRef.current.value+"@paymentor.com", "user@321")
-                // alert("User added Successfully")
-
+               
             } catch(err){
                 alert("Failed")
                 console.log(err);
@@ -92,7 +90,7 @@ const PasswordChange = () => {
 
         <>
         <div className="container-fluid d-flex justify-content-center align-items-center flex-wrap mt-5">
-        <img src="/img/password.svg" alt="Profile img" className="w-50 p-5" />
+        <img src="/img/password.svg" alt="Profile img" className="w-50" />
 
                 <div className="bg-light vh d-flex flex-column justify-content-center align-items-center mt-4">
                 {/* {currentUser && currentUser.email} */}
@@ -101,7 +99,7 @@ const PasswordChange = () => {
                 <form onSubmit={handleSubmit} className="d-flex justify-content-center align-items-start flex-wrap pb-5">
                     <div className="mx-5">
                         <div className="div">
-                            <p><label for="username">URN</label></p>
+                            <p><label for="username">Username</label></p>
                             <p><input type="text" name="username" id="username" value={newURN}
                             onChange={(e) => {
                             setnewURN(e.target.value);

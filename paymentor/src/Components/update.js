@@ -3,47 +3,6 @@ import { db } from '../backend/firebase'
 import { collection, addDoc , getDocs } from "firebase/firestore"
 import firebase from '../backend/firebase'
 
-// // const Update = () => {
-
-// //     const userCollectionRef = collection(db ,"User");
-
-// //     const [users, setUsers] = useState([]);
-// //     const [filterUser, setfilterUser] = useState([]);
-
-// //     useEffect(() => {
-        
-// //         const getUsers = async () => {
-// //             const data = await getDocs(userCollectionRef)
-// //             setUsers(data.docs.map((doc) => ({...doc.data(), id: doc.username})))
-// //         }
-
-// //         getUsers()
-// //     }, [])
-
-
-
-    
-// function Update(){
-//     const [newName, setnewName] = useState();
-//     const [newUsername, setnewUsername] = useState();
-//     const [newPass, setnewPass] = useState();
-//     const [newClass, setnewClass] = useState();
-//     const [newDept, setnewDept] = useState();
-//     const [newCategory, setnewCategory] = useState();
-
-//     const display = async (val) => {
-//         users.filter((val) => {
-//             if(val == "") {
-//                 alert("Enter Correct Value")
-//             } else if(val.toLowecase() == users.map((user) => {user.username})) {
-//                 setfilterUser(data.docs.map((doc) => ({...doc.data(), id: doc.username})))
-//             }
-//         })
-// }
-    
-//     return (
-//         <>
-
 const Update = () => {
 
     const userCollectionRef = collection(db ,"User");
@@ -51,15 +10,7 @@ const Update = () => {
     const [users, setUsers] = useState([]);
     const [filterUser, setfilterUser] = useState([]);
 
-    // useEffect(() => {
-        
-    //     const getUsers = async () => {
-    //         const data = await getDocs(userCollectionRef)
-    //         setUsers(data.docs.map((doc) => ({...doc.data(), id: doc.username})))
-    //     }
 
-    //     getUsers()
-    // }, [])
 
     const [newName, setnewName] = React.useState("");
     const [newUsername, setnewUsername] = React.useState("");
@@ -90,15 +41,6 @@ const Update = () => {
               });
     }
 
-    // const display = async (val) => {
-    //         users.filter((val) => {
-    //             if(val == "") {
-    //                 alert("Enter Correct Value")
-    //             } else if(val.toLowecase() == users.map((user) => {user.username})) {
-    //                 setfilterUser(data.docs.map((doc) => ({...doc.data(), id: doc.username})))
-    //             }
-    //         })
-    // }
 
     return (
         <>
@@ -117,17 +59,7 @@ const Update = () => {
                                                 onChange={(e) => {
                                                     setnewUsername(e.target.value);
                                                 }}/>
-                                                    {/* <input className="btn btn-primary ms-3" type="submit" name="submit" value="Submit"
-                                                    onClick={() => {display(newUsername)}}
-                                                    /> */}
-                                    
-                                                {/* <div className="div">
-                                                    <p><label for="username">Username</label></p>
-                                                    <p><input type="text" name="username" id="username"
-                                                        onChange={(e) => {
-                                                            setnewUsername(e.target.value);
-                                                        }}/></p>
-                                                </div> */}
+                                                
                                         </div>
                                     
                                         <div className="mt-5">
@@ -163,7 +95,7 @@ const Update = () => {
                                     <div className="b">
                                     <div className="div">
                                         <p><label for="category">Category</label></p>
-                                        {/* <p><input type="text" name="category" id="category" /></p> */}
+                                        
                                         <p><select className="px-5 py-1" type="text" id="category" name="category"
                                         onChange={(e) => {
                                             setnewCategory(e.target.value);

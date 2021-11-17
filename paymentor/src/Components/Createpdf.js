@@ -63,8 +63,7 @@ console.log(info);
                                     setinfo({...info, price2: e.target.value});
                                 }}/></p>
                 </div>
-                           {/* <button className="btn btn-primary px-4 py-2" 
-                           onClick={createAndDownloadPdf} >Create</button> */}
+                          
 
                     <p><input className="btn btn-primary " type="submit" name="submit" value="Create" 
                         onClick={generatePdf} 
